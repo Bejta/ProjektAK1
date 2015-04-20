@@ -57,6 +57,8 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\CSS\Style.css" />
+    <Content Include="Global.asax" />
     <Content Include="Pages\Shared\WebShop.Master" />
     <Content Include="Pages\Shared\WebAdmin.Master" />
     <None Include="Web.Debug.config">
@@ -82,6 +84,11 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Infrastructure\ValidationExtensions.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
     <Compile Include="Model\BLL\Category.cs" />
     <Compile Include="Model\BLL\Grade.cs" />
     <Compile Include="Model\BLL\Order.cs" />
@@ -90,6 +97,7 @@
     <Compile Include="Model\BLL\Product.cs" />
     <Compile Include="Model\BLL\Productgrade.cs" />
     <Compile Include="Model\BLL\Review.cs" />
+    <Compile Include="Model\BLL\Service.cs" />
     <Compile Include="Model\BLL\Tax.cs" />
     <Compile Include="Model\BLL\User.cs" />
     <Compile Include="Model\DAL\CategoryDAL.cs" />
@@ -112,6 +120,7 @@
     </Compile>
     <Compile Include="Pages\Shared\WebAdmin.Master.cs">
       <DependentUpon>WebAdmin.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Pages\Shared\WebAdmin.Master.designer.cs">
       <DependentUpon>WebAdmin.Master</DependentUpon>
@@ -202,9 +211,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Infrastructure\" />
-    <Folder Include="App_Start\" />
-    <Folder Include="Content\CSS\" />
     <Folder Include="Content\Images\Thumbs\" />
     <Folder Include="Scripts\" />
   </ItemGroup>

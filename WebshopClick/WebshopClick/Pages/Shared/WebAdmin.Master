@@ -4,17 +4,37 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title></title>
+    <title>WebShop Admin</title>
+    <link href="~/Content/CSS/style.css" rel="stylesheet" type="text/css" />
+    <link href='http://fonts.googleapis.com/css?family=Jura:400,300,500,600' rel='stylesheet' type='text/css' />
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>
 <body>
     <form id="form1" runat="server">
-    <div>
-        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+<%--Header--%>
+    <div id="admin_wrapper">
+        <div id="admin_header">
+            <h1>Administration</h1>
+        </div>
+        <div id="admin_menu">
+            <ul>
+                <li><asp:LinkButton ID="LinkButton6" runat="server">Logga in</asp:LinkButton></li>
+                <li><asp:LinkButton ID="LinkButton7" runat="server">Beställningar</asp:LinkButton></li>
+                <li><asp:LinkButton ID="LinkButton8" runat="server">Produkter</asp:LinkButton></li>
+                <li><asp:LinkButton ID="LinkButton9" runat="server">Egenskaper</asp:LinkButton></li>
+                <li><asp:LinkButton ID="LinkButton10" runat="server">Statistik</asp:LinkButton></li>
+            </ul>
+            
+        </div>
         
+        <asp:ContentPlaceHolder ID="admin_content" runat="server">
         </asp:ContentPlaceHolder>
     </div>
+        <div id="admin_footer">
+            <p id="Copyright"> &copy; 2015 Jasmin Bejtovic</p>
+            <p id="Signature">Linnéuniversitetet | Webbprogrammerare 2014, WebshopClick</p>
+        </div>
     </form>
 </body>
 </html>

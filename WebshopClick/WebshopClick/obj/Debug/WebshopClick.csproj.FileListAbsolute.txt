@@ -1,0 +1,6 @@
+C:\Users\Jasmin\Documents\Webbprogrammerare\IndividuelltMjukvaruutvecklingsprojekt\jb223cp-project\WebshopClick\WebshopClick\obj\Debug\WebshopClick.csprojResolveAssemblyReference.cache
+C:\Users\Jasmin\Documents\Webbprogrammerare\IndividuelltMjukvaruutvecklingsprojekt\jb223cp-project\WebshopClick\WebshopClick\bin\WebshopClick.dll.config
+C:\Users\Jasmin\Documents\Webbprogrammerare\IndividuelltMjukvaruutvecklingsprojekt\jb223cp-project\WebshopClick\WebshopClick\bin\WebshopClick.dll
+C:\Users\Jasmin\Documents\Webbprogrammerare\IndividuelltMjukvaruutvecklingsprojekt\jb223cp-project\WebshopClick\WebshopClick\bin\WebshopClick.pdb
+C:\Users\Jasmin\Documents\Webbprogrammerare\IndividuelltMjukvaruutvecklingsprojekt\jb223cp-project\WebshopClick\WebshopClick\obj\Debug\WebshopClick.dll
+C:\Users\Jasmin\Documents\Webbprogrammerare\IndividuelltMjukvaruutvecklingsprojekt\jb223cp-project\WebshopClick\WebshopClick\obj\Debug\WebshopClick.pdb
