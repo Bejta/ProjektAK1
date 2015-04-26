@@ -8,63 +8,63 @@ using WebshopClick.Model.BLL;
 
 namespace WebshopClick.Model.DAL
 {
-    public class PaymentDAL:DALBase
+    public class StatusDAL : DALBase
     {
         /// <summary>
-        /// Method that returns all payment types
+        /// Method that returns all status types
         /// </summary>
-        /// <returns>List of payment objects</returns>
-        public IEnumerable<Payment> GetPayment()
+        /// <returns>List of status objects</returns>
+        public IEnumerable<Status> GetStatus()
         {
             using (var conn = CreateConnection())
             {
                 try
                 {
-                    var payment = new List<Payment>(10);
+                    var status = new List<Status>(10);
 
-                    var cmd = new SqlCommand("appSchema.uspGetPayment", conn);
+                    var cmd = new SqlCommand("appSchema.uspGetStatus", conn);
                     cmd.CommandType = CommandType.StoredProcedure;
                     conn.Open();
 
                     using (var reader = cmd.ExecuteReader())
                     {
-                        var PaymentIDIndex = reader.GetOrdinal("PaymentID");
-                        int PaymentTypeIndex = reader.GetOrdinal("PaymentType");
+                        var StatusIDIndex = reader.GetOrdinal("StatusID");
+                        int StatusTypeIndex = reader.GetOrdinal("StatusType");
 
                         while (reader.Read())
                         {
-                            payment.Add(new Payment
+                            status.Add(new Status
                             {
-                                PaymentID = reader.GetInt32(PaymentIDIndex),
-                                PaymentType = reader.GetString(PaymentTypeIndex),
+                                StatusID = reader.GetInt32(StatusIDIndex),
+                                StatusType = reader.GetString(StatusTypeIndex),
                             });
                         }
                     }
-                    payment.TrimExcess();
-                    return payment;
+                    status.TrimExcess();
+                    return status;
                 }
                 catch
                 {
-                    throw new ApplicationException("An error occured while getting payment types from the database.");
+                    throw new ApplicationException("An error occured while getting status types from the database.");
                 }
             }
         }
         /// <summary>
-        /// Updates payment
+        /// Updates status
         /// </summary>
-        /// <param name="payment"></param>
-        public void UpdatePayment(Payment payment)
+        /// <param name="status"></param>
+        public void UpdateStatus(Status status)
         {
             using (SqlConnection conn = CreateConnection())
             {
                 try
                 {
-                    SqlCommand cmd = new SqlCommand("appSchema.uspUpdatePayment", conn);
+                    SqlCommand cmd = new SqlCommand("appSchema.uspUpdateStatus", conn);
                     cmd.CommandType = CommandType.StoredProcedure;
 
                     conn.Open();
-                    cmd.Parameters.Add("@PaymentID", SqlDbType.Int, 4).Value = payment.PaymentID;
-                    cmd.Parameters.Add("@PaymentType", SqlDbType.NVarChar, 30).Value = payment.PaymentType;
+                    cmd.Parameters.Add("@StatusID", SqlDbType.Int, 4).Value = status.StatusID;
+                    cmd.Parameters.Add("@StatusType", SqlDbType.NVarChar, 20).Value = status.StatusType;
                     cmd.ExecuteNonQuery();
 
                 }
@@ -74,23 +74,23 @@ namespace WebshopClick.Model.DAL
                 }
             }
         }
-        public void InsertPayment(Payment payment)
+        public void InsertStatus(Status status)
         {
             using (SqlConnection conn = CreateConnection())
             {
                 try
                 {
-                    SqlCommand cmd = new SqlCommand("appSchema.uspInsertPayment", conn);
+                    SqlCommand cmd = new SqlCommand("appSchema.uspInsertStatus", conn);
                     cmd.CommandType = CommandType.StoredProcedure;
 
 
-                    cmd.Parameters.Add("@PaymentType", SqlDbType.NVarChar, 30).Value = payment.PaymentType;
-                    cmd.Parameters.Add("@PaymentID", SqlDbType.Int, 4).Direction = ParameterDirection.Output;
+                    cmd.Parameters.Add("@StatusType", SqlDbType.NVarChar, 20).Value = status.StatusType;
+                    cmd.Parameters.Add("@StatusID", SqlDbType.Int, 4).Direction = ParameterDirection.Output;
 
                     conn.Open();
                     cmd.ExecuteNonQuery();
 
-                    payment.PaymentID = (int)cmd.Parameters["@PaymentID"].Value;
+                    status.StatusID = (int)cmd.Parameters["@StatusID"].Value;
                 }
                 catch
                 {
@@ -99,21 +99,21 @@ namespace WebshopClick.Model.DAL
             }
         }
         /// <summary>
-        /// Method to get payment types by specific id
+        /// Method to get status types by specific id
         /// </summary>
-        /// <param name="id">Payment indetity</param>
-        /// <returns>Payment</returns>
-        public Payment GetPaymentById(int id)
+        /// <param name="id">Status indetity</param>
+        /// <returns>Status</returns>
+        public Status GetStatusById(int id)
         {
             using (SqlConnection conn = CreateConnection())
             {
                 try
                 {
 
-                    SqlCommand cmd = new SqlCommand("appSchema.uspGetPaymentById", conn);
+                    SqlCommand cmd = new SqlCommand("appSchema.uspGetStatusById", conn);
                     cmd.CommandType = CommandType.StoredProcedure;
 
-                    cmd.Parameters.AddWithValue("@PaymentID", id);
+                    cmd.Parameters.AddWithValue("@StatusID", id);
                     conn.Open();
 
 
@@ -121,14 +121,14 @@ namespace WebshopClick.Model.DAL
                     {
                         if (reader.Read())
                         {
-                            int PaymentIDIndex = reader.GetOrdinal("PaymentID");
-                            int PaymentTypeIndex = reader.GetOrdinal("PaymentType");
+                            int StatusIDIndex = reader.GetOrdinal("StatusID");
+                            int StatusTypeIndex = reader.GetOrdinal("StatusType");
 
 
-                            return new Payment
+                            return new Status
                             {
-                                PaymentID = reader.GetInt32(PaymentIDIndex),
-                                PaymentType = reader.GetString(PaymentTypeIndex),
+                                StatusID = reader.GetInt32(StatusIDIndex),
+                                StatusType = reader.GetString(StatusTypeIndex),
                             };
                         }
                     }
@@ -140,17 +140,17 @@ namespace WebshopClick.Model.DAL
                 }
             }
         }
-        public void DeletePayment(int ID)
+        public void DeleteStatus(int ID)
         {
 
             using (SqlConnection conn = CreateConnection())
             {
                 try
                 {
-                    SqlCommand cmd = new SqlCommand("appSchema.uspDeletePayment", conn);
+                    SqlCommand cmd = new SqlCommand("appSchema.uspDeleteStatus", conn);
                     cmd.CommandType = CommandType.StoredProcedure;
                     conn.Open();
-                    cmd.Parameters.Add("@PaymentID", SqlDbType.Int, 4).Value = ID;
+                    cmd.Parameters.Add("@StatusID", SqlDbType.Int, 4).Value = ID;
                     cmd.ExecuteNonQuery();
                 }
                 catch

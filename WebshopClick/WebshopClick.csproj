@@ -104,6 +104,7 @@
     <Compile Include="Model\BLL\Productgrade.cs" />
     <Compile Include="Model\BLL\Review.cs" />
     <Compile Include="Model\BLL\Service.cs" />
+    <Compile Include="Model\BLL\Status.cs" />
     <Compile Include="Model\BLL\Tax.cs" />
     <Compile Include="Model\BLL\User.cs" />
     <Compile Include="Model\DAL\CategoryDAL.cs" />
@@ -115,6 +116,7 @@
     <Compile Include="Model\DAL\ProductDAL.cs" />
     <Compile Include="Model\DAL\Productgrade.cs" />
     <Compile Include="Model\DAL\ReviewDAL.cs" />
+    <Compile Include="Model\DAL\StatusDAL.cs" />
     <Compile Include="Model\DAL\TaxDAL.cs" />
     <Compile Include="Model\DAL\UserDAL.cs" />
     <Compile Include="Pages\Shared\Error.aspx.cs">

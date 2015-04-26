@@ -7,14 +7,14 @@ using System.Web;
 namespace WebshopClick.Model.BLL
 {
     /// <summary>
-    /// Class for Payment table in the database
+    /// Class for Status table in the database
     /// </summary>
-    public class Payment
+    public class Status
     {
-        public int PaymentID { get; set; }
+        public int StatusID { get; set; }
 
         [Required(ErrorMessage = "En betalning måste anges.")]
-        [StringLength(30, ErrorMessage = "Betalningen kan bestå av som mest 30 tecken.")]
-        public string PaymentType { get; set; }
+        [StringLength(20, ErrorMessage = "Betalningen kan bestå av som mest 20 tecken.")]
+        public string StatusType { get; set; }
     }
 }

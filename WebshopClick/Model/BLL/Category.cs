@@ -14,7 +14,7 @@ namespace WebshopClick.Model.BLL
         public int CategoryID { get; set; }
 
         [Required(ErrorMessage = "Ett kategori måste anges.")]
-        [StringLength(20, ErrorMessage = "Kategoriet kan bestå av som mest 30 tecken.")]
+        [StringLength(30, ErrorMessage = "Kategoriet kan bestå av som mest 30 tecken.")]
         public string CategoryName { get; set; }
     }
 }
