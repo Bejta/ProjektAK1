@@ -1,0 +1,45 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="WebAdmin.master.cs" Inherits="WebshopClick.Pages.Shared.WebAdmin" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>WebShop Admin</title>
+    <link href="~/Content/CSS/style.css" rel="stylesheet" type="text/css" />
+    <link href='http://fonts.googleapis.com/css?family=Jura:400,300,500,600' rel='stylesheet' type='text/css' />
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+<%--Header--%>
+    <div id="admin_wrapper">
+        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+        </asp:ContentPlaceHolder>
+        
+        <div id="admin_header">
+            <h1>Administration</h1>
+        </div>
+        <div id="admin_menu">
+            <ul>
+                <li><asp:LinkButton ID="ALogin" runat="server" OnClick="Alogin_Click">Logga in</asp:LinkButton></li>
+                <li><asp:LinkButton ID="AdminOrders" runat="server" OnClick="AdminOrders_Click">Beställningar</asp:LinkButton></li>
+                <li><asp:LinkButton ID="AdminProducts" runat="server" OnClick="AdminProducts_Click">Produkter</asp:LinkButton></li>
+                <li><asp:LinkButton ID="Settings" runat="server" OnClick="Settings_Click">Egenskaper</asp:LinkButton></li>
+                <li><asp:LinkButton ID="Statistics" runat="server" OnClick="Statistics_Click">Statistik</asp:LinkButton></li>
+            </ul>
+            
+        </div>
+        
+        <asp:ContentPlaceHolder ID="admin_content" runat="server">
+        </asp:ContentPlaceHolder>
+            
+    </div>
+        <div id="admin_footer">
+            <p id="Copyright"> &copy; 2015 Jasmin Bejtovic</p>
+            <p id="Signature">Linnéuniversitetet | Webbprogrammerare 2014, WebshopClick</p>
+        </div>
+        
+    </form>
+</body>
+</html>

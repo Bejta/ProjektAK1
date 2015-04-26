@@ -1,0 +1,116 @@
+﻿html, body, div, span, applet, object, iframe,
+p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+#admin_wrapper{
+    width:80%;
+    margin-left:auto;
+    margin-right:auto;
+}
+#admin_header{
+    background-color:orangered;
+    text-align:center;
+}
+h1{
+    color:white;
+    padding-top:2%;
+    padding-bottom:2%;
+    font-family:'Jura', sans-serif;
+}
+#admin_menu{
+    width:20%;
+    float:left;
+    border-style:dotted;
+    border-color:black;
+    border-width:thin;
+}
+#admin_content{
+    width:77%;
+    margin-left:2%;
+}
+ul{
+    list-style:none;
+}
+#admin_footer{
+    clear:both;
+    width:80%;
+    margin-left:auto;
+    margin-right:auto;
+    border-style:dotted;
+    border-color:black;
+    border-width:thin;
+    color:#808080;
+    font-family:Tahoma;
+    font-size:0.8em;
+}
+table
+{
+    border: 1px solid #333;
+    border-collapse: collapse;
+    border-spacing: 0px;
+    margin-left:3%;
+    font-family:Tahoma;
+}
+
+th
+{
+    background: #333;
+    color: #FFF;
+}
+
+td, th
+{
+    padding: 3px 2px;
+    text-align: left;
+    vertical-align: middle;
+}
+
+/*Buttons on settings page*/
+.settingButtons{
+    width:100px;
+    height:80px;
+    border-color:black;
+    border-style:solid;
+    border-width:2px;
+    margin-left:2%;
+    color:white;
+    font-family:'Jura', sans-serif;
+    
+}
+#admin_content_category.settingButtons{
+    background-color:#B31B42;
+}
+#admin_content_grade.settingButtons{
+    background-color:#00A400;
+}
+#admin_content_tax.settingButtons{
+    background-color:#DB562D;
+}
+#admin_content_payment.settingButtons{
+    background-color:#0158CB;
+}
+#admin_content_status.settingButtons{
+    background-color:#5E3BB9;
+}
+/*End of buttons on settings page*/
