@@ -15,11 +15,16 @@ namespace WebshopClick.Model.BLL
         private StatusDAL _statusDAL;
         private GradeDAL _gradeDAL;
         private TaxDAL _taxDAL;
+        private ProductDAL _productDAL;
 
 
         private CategoryDAL CategoryDAL
         {
             get { return _categoryDAL ?? (_categoryDAL = new CategoryDAL()); }
+        }
+        private ProductDAL ProductDAL
+        {
+            get { return _productDAL ?? (_productDAL = new ProductDAL()); }
         }
         private PaymentDAL PaymentDAL
         {
@@ -218,6 +223,42 @@ namespace WebshopClick.Model.BLL
             {
                 StatusDAL.UpdateStatus(status);
             }
+        }
+        public Product GetProduct(int id)
+        {
+            return ProductDAL.GetProductById(id);
+        }
+        public IEnumerable<Product> GetProduct()
+        {
+            return ProductDAL.GetProduct();
+        }
+        public Product GetProductByID(int id)
+        {
+            return ProductDAL.GetProductById(id);
+        }
+        public void DeleteProduct(int ID)
+        {
+            ProductDAL.DeleteProduct(ID);
+        }
+        public void UpdateProduct(Product product)
+        {
+
+            ICollection<ValidationResult> validationResults;
+            if (!product.Validate(out validationResults))
+            {
+                var ex = new ValidationException("Objektet klarade inte valideringen.");
+                ex.Data.Add("ValidationResults", validationResults);
+                throw ex;
+            }
+            if (product.ProductID == 0) // New post if ID is 0!
+            {
+                ProductDAL.InsertProduct(product);
+            }
+            else
+            {
+                ProductDAL.UpdateProduct(product);
+            }
+
         }
     }
 }

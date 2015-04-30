@@ -70,10 +70,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Pages\Shared\Error.aspx" />
+    <Content Include="Pages\WebAdminPages\AddProduct.aspx" />
     <Content Include="Pages\WebAdminPages\AdminLogin.aspx" />
     <Content Include="Pages\WebAdminPages\AdminOrders.aspx" />
     <Content Include="Pages\WebAdminPages\AdminProducts.aspx" />
     <Content Include="Pages\WebAdminPages\Categories.aspx" />
+    <Content Include="Pages\WebAdminPages\NewProduct.aspx" />
     <Content Include="Pages\WebAdminPages\SettingPages\SetCategory.aspx" />
     <Content Include="Pages\WebAdminPages\SettingPages\SetGrades.aspx" />
     <Content Include="Pages\WebAdminPages\SettingPages\SetPayment.aspx" />
@@ -119,6 +121,7 @@
     <Compile Include="Model\DAL\StatusDAL.cs" />
     <Compile Include="Model\DAL\TaxDAL.cs" />
     <Compile Include="Model\DAL\UserDAL.cs" />
+    <Compile Include="Model\Images.cs" />
     <Compile Include="Pages\Shared\Error.aspx.cs">
       <DependentUpon>Error.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -139,6 +142,13 @@
     </Compile>
     <Compile Include="Pages\Shared\WebShop.Master.designer.cs">
       <DependentUpon>WebShop.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\WebAdminPages\AddProduct.aspx.cs">
+      <DependentUpon>AddProduct.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\WebAdminPages\AddProduct.aspx.designer.cs">
+      <DependentUpon>AddProduct.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\WebAdminPages\AdminLogin.aspx.cs">
       <DependentUpon>AdminLogin.aspx</DependentUpon>
@@ -167,6 +177,13 @@
     </Compile>
     <Compile Include="Pages\WebAdminPages\Categories.aspx.designer.cs">
       <DependentUpon>Categories.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\WebAdminPages\NewProduct.aspx.cs">
+      <DependentUpon>NewProduct.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\WebAdminPages\NewProduct.aspx.designer.cs">
+      <DependentUpon>NewProduct.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\WebAdminPages\SettingPages\SetCategory.aspx.cs">
       <DependentUpon>SetCategory.aspx</DependentUpon>

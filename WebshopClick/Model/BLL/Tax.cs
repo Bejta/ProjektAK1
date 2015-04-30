@@ -14,7 +14,7 @@ namespace WebshopClick.Model.BLL
         public int TaxID { get; set; }
 
         [Required(ErrorMessage = "Moms måste anges.")]
-        [Range(0, Int32.MaxValue, ErrorMessage = "Ett heltal större än 0 måste anges.")]
+        [Range(0.00, 999999999, ErrorMessage = "Ett tal större än 0 måste anges.")]
         public decimal TaxValue { get; set; }
     }
 }
