@@ -30,7 +30,7 @@
                 <label for="Description">Beskrivning</label>
             </div>
             <div class="editor-field">
-                <asp:TextBox ID="Description" runat="server" Text='<%# BindItem.Description %>' />
+                <asp:TextBox TextMode="MultiLine" Rows="5" ID="Description" runat="server" Text='<%# BindItem.Description %>' />
             </div>
             <div class="editor-label">
                 <label for="CategoryDropDownList">Kategori</label>

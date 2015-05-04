@@ -19,7 +19,10 @@ namespace WebshopClick.App_Start
             routes.MapPageRoute("ALogin", "ALogin", "~/Pages/WebAdminPages/AdminLogin.aspx");
             routes.MapPageRoute("AOrders", "AOrders", "~/Pages/WebAdminPages/AdminOrders.aspx");
             routes.MapPageRoute("Statistics", "Statistics", "~/Pages/WebAdminPages/Statistics.aspx");
-            routes.MapPageRoute("AProducts", "AProducts", "~/Pages/WebAdminPages/AddProduct.aspx");
+            routes.MapPageRoute("AProducts", "AProducts", "~/Pages/WebAdminPages/AdminProducts.aspx");
+            routes.MapPageRoute("AddProduct", "AddProduct", "~/Pages/WebAdminPages/AddProduct.aspx");
+            routes.MapPageRoute("EditProduct", "EditProduct/{ProductID}", "~/Pages/WebAdminPages/EditProduct.aspx");
+            routes.MapPageRoute("Index", "Index", "~/Pages/WebShopPages/Default.aspx");
         }
     }
 }

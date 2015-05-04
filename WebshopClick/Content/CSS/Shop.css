@@ -1,0 +1,63 @@
+﻿
+html, body, div, span, applet, object, iframe,
+p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+}
+
+#shop_login{
+    width:100%;
+    margin-left:2%;
+    background-color:darkred;
+    height:115px;
+    
+    text-align:center;
+}
+.productlist{
+    display:inline;
+}
+#shop_header{
+    float:left;
+    width:80%;
+    background-color:darkred;
+    text-align:center;
+}
+h1{
+    color:white;
+    padding-top:2%;
+    padding-bottom:2%;
+    font-family:'Jura', sans-serif;
+}
+#shop_wrapper{
+    width:80%;
+    margin-left:auto;
+    margin-right:auto;
+}
+li {
+    display:inline;
+    float: left;
+    margin-bottom:15px;
+    margin-left:15px;
+}

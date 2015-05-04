@@ -13,12 +13,21 @@ namespace WebshopClick.Pages.WebAdminPages {
     public partial class AdminProducts {
         
         /// <summary>
-        /// ProductFormView control.
+        /// ButtonAdd control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.FormView ProductFormView;
+        protected global::System.Web.UI.WebControls.Button ButtonAdd;
+        
+        /// <summary>
+        /// productList control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ListView productList;
     }
 }

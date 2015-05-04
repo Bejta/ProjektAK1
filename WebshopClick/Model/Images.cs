@@ -140,7 +140,7 @@ namespace WebshopClick.Model
                     throw new Exception();
                 }
                 
-                var thumbnail = image.GetThumbnailImage(60, 45, null, System.IntPtr.Zero);
+                var thumbnail = image.GetThumbnailImage(180, 135, null, System.IntPtr.Zero);
                 thumbnail.Save(PhysicalUploadedThumbsPath + fileName);
 
                 return fileName;

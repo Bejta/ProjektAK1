@@ -57,6 +57,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\CSS\Shop.css" />
     <Content Include="Content\CSS\Style.css" />
     <Content Include="Global.asax" />
     <Content Include="Pages\Shared\WebShop.Master" />
@@ -75,6 +76,7 @@
     <Content Include="Pages\WebAdminPages\AdminOrders.aspx" />
     <Content Include="Pages\WebAdminPages\AdminProducts.aspx" />
     <Content Include="Pages\WebAdminPages\Categories.aspx" />
+    <Content Include="Pages\WebAdminPages\EditProduct.aspx" />
     <Content Include="Pages\WebAdminPages\NewProduct.aspx" />
     <Content Include="Pages\WebAdminPages\SettingPages\SetCategory.aspx" />
     <Content Include="Pages\WebAdminPages\SettingPages\SetGrades.aspx" />
@@ -177,6 +179,13 @@
     </Compile>
     <Compile Include="Pages\WebAdminPages\Categories.aspx.designer.cs">
       <DependentUpon>Categories.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\WebAdminPages\EditProduct.aspx.cs">
+      <DependentUpon>EditProduct.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\WebAdminPages\EditProduct.aspx.designer.cs">
+      <DependentUpon>EditProduct.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\WebAdminPages\NewProduct.aspx.cs">
       <DependentUpon>NewProduct.aspx</DependentUpon>

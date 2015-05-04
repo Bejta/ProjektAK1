@@ -41,7 +41,7 @@ h1{
 #admin_menu{
     width:20%;
     height:100%;
-    padding-bottom:150px;
+    padding-bottom:450px;
     float:left;
     border-style:dotted;
     border-color:black;
@@ -54,6 +54,15 @@ h1{
 #ProductFormView{
     width:77%;
     margin-left:2%;
+}
+.productlist{
+    display:inline;
+}
+.productsadminlist {
+    display:inline;
+    float: left;
+    margin-bottom:15px;
+    margin-left:15px;
 }
 #admin_content_ct100{
     width:77%;

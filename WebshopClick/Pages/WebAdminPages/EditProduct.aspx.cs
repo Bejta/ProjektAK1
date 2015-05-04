@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Web;
+using System.Web.ModelBinding;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using WebshopClick.Model;
@@ -10,17 +11,8 @@ using WebshopClick.Model.BLL;
 
 namespace WebshopClick.Pages.WebAdminPages
 {
-    
-    public partial class AddProduct : System.Web.UI.Page
+    public partial class EditProduct : System.Web.UI.Page
     {
-        /// <summary>
-        /// FileUpload control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.FileUpload FileUpload;
         private Images imagesPrivate;
         /// <summary>
         /// If object gallery is not null use it, otherwise make new...
@@ -51,6 +43,8 @@ namespace WebshopClick.Pages.WebAdminPages
 
         private Service Service
         {
+            // Ett Service-objekt skapas först då det behövs för första 
+            // gången (lazy initialization, http://en.wikipedia.org/wiki/Lazy_initialization).
             get { return _service ?? (_service = new Service()); }
         }
         protected void Page_Load(object sender, EventArgs e)
@@ -62,9 +56,19 @@ namespace WebshopClick.Pages.WebAdminPages
             {
                 txt.Text = "unknown.jpg";
             }
-
         }
-
+        public IEnumerable<Category> CategoryDropDownList_GetData()
+        {
+            try
+            {
+                return Service.GetCategory();
+            }
+            catch (Exception)
+            {
+                ModelState.AddModelError(String.Empty, "Ett oväntat fel inträffade då kategoriuppgifter skulle hämtas.");
+                return null;
+            }
+        }
         protected void UploadButton_Click(object sender, EventArgs e)
         {
             if (IsValid)
@@ -86,9 +90,9 @@ namespace WebshopClick.Pages.WebAdminPages
                     {
                         txt.Text = name;
                     }
-                    
+
                     //UploadMessage.Visible = true;
-                    
+
                     //Response.Redirect("Default.aspx/" + image);
                 }
                 catch
@@ -101,34 +105,46 @@ namespace WebshopClick.Pages.WebAdminPages
                 }
             }
         }
-        public IEnumerable<Category> CategoryDropDownList_GetData()
+        public Product ProductFormView_GetItem([RouteData] int ProductID)
         {
             try
             {
-                return Service.GetCategory();
+                Service service = new Service();
+                return service.GetProductByID(ProductID);
             }
             catch (Exception)
             {
-                ModelState.AddModelError(String.Empty, "Ett oväntat fel inträffade då kategoriuppgifter skulle hämtas.");
+                ModelState.AddModelError(String.Empty, "Fel inträffade då produkten hämtades.");
                 return null;
             }
         }
-        public void ProductFormView_InsertItem(Product product)
+        /// <summary>
+        /// Uppdaterar en produkt uppgifter i databasen.
+        /// </summary>
+        /// <param name="ProductID"></param>
+        public void ProductFormView_UpdateItem(int ProductID) // Parameterns namn måste överrensstämma med värdet DataKeyNames har.
         {
-            if (ModelState.IsValid)
+            try
             {
-                try
+                var product = Service.GetProductByID(ProductID);
+                if (product == null)
                 {
-                    Service service = new Service();
-                    service.UpdateProduct(product);
-                    //Session["Success"] = true;
-                    Response.RedirectToRoute("AProducts");
+                    // Hittade inte kunden.
+                    ModelState.AddModelError(String.Empty,
+                        String.Format("Produkten med id {0} hittades inte.", ProductID));
+                    return;
                 }
-                catch (Exception)
+
+                if (TryUpdateModel(product))
                 {
-                    ModelState.AddModelError(String.Empty, "Fel inträffade då linje skulle läggas till.");
+                    Service.UpdateProduct(product);
+                    Response.RedirectToRoute("Aproducts");
                 }
             }
-        } 
+            catch (Exception)
+            {
+                ModelState.AddModelError(String.Empty, "Fel inträffade då produkten skulle uppdateras.");
+            }
+        }
     }
 }
