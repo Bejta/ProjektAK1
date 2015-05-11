@@ -13,14 +13,20 @@
 <body>
     <form id="form1" runat="server">
     <div id="shop_wrapper">
-        <div id="shop_header">
-            <h1>Webshop Click</h1>
-        </div>
-        <div id="shop_login">
-            <a>Logga in</a>
-        </div>
-        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
         
+        <div id="shop_header">
+            <div id="logo">
+               <h1>Logotyp</h1>
+            </div>
+            <h1>Webshop Click</h1>
+            
+            <div id="shop_login">
+                <a>Logga in</a>
+            </div>
+        </div>
+        
+        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+            
         </asp:ContentPlaceHolder>
     </div>
     </form>

@@ -72,12 +72,12 @@
   <ItemGroup>
     <Content Include="Pages\Shared\Error.aspx" />
     <Content Include="Pages\WebAdminPages\AddProduct.aspx" />
+    <Content Include="Pages\WebAdminPages\ADetails.aspx" />
     <Content Include="Pages\WebAdminPages\AdminLogin.aspx" />
     <Content Include="Pages\WebAdminPages\AdminOrders.aspx" />
     <Content Include="Pages\WebAdminPages\AdminProducts.aspx" />
     <Content Include="Pages\WebAdminPages\Categories.aspx" />
     <Content Include="Pages\WebAdminPages\EditProduct.aspx" />
-    <Content Include="Pages\WebAdminPages\NewProduct.aspx" />
     <Content Include="Pages\WebAdminPages\SettingPages\SetCategory.aspx" />
     <Content Include="Pages\WebAdminPages\SettingPages\SetGrades.aspx" />
     <Content Include="Pages\WebAdminPages\SettingPages\SetPayment.aspx" />
@@ -152,6 +152,13 @@
     <Compile Include="Pages\WebAdminPages\AddProduct.aspx.designer.cs">
       <DependentUpon>AddProduct.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Pages\WebAdminPages\ADetails.aspx.cs">
+      <DependentUpon>ADetails.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\WebAdminPages\ADetails.aspx.designer.cs">
+      <DependentUpon>ADetails.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Pages\WebAdminPages\AdminLogin.aspx.cs">
       <DependentUpon>AdminLogin.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -186,13 +193,6 @@
     </Compile>
     <Compile Include="Pages\WebAdminPages\EditProduct.aspx.designer.cs">
       <DependentUpon>EditProduct.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\WebAdminPages\NewProduct.aspx.cs">
-      <DependentUpon>NewProduct.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Pages\WebAdminPages\NewProduct.aspx.designer.cs">
-      <DependentUpon>NewProduct.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\WebAdminPages\SettingPages\SetCategory.aspx.cs">
       <DependentUpon>SetCategory.aspx</DependentUpon>

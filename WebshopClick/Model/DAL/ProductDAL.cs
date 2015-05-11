@@ -165,6 +165,234 @@ namespace WebshopClick.Model.DAL
                 }
             }
         }
+        public IEnumerable<Product> GetProductPageWise(int maximumRows, int startRowIndex, out int totalRowCount)
+        {
+            using (SqlConnection conn = CreateConnection())
+            {
+                try
+                {
+
+                    SqlCommand cmd = new SqlCommand("appSchema.uspGetProductPageWise", conn);
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    cmd.Parameters.Add("@PageIndex", SqlDbType.Int, 6).Value = startRowIndex / maximumRows + 1;
+                    cmd.Parameters.Add("@PageSize", SqlDbType.Int, 6).Value = maximumRows;
+                    cmd.Parameters.Add("@RecordCount", SqlDbType.Int, 4).Direction = ParameterDirection.Output;
+                    List<Product> products = new List<Product>(100);
+
+                    conn.Open();
+
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        var ProductIDIndex = reader.GetOrdinal("ProductID");
+                        int ProductNameIndex = reader.GetOrdinal("Name");
+                        int PriceIndex = reader.GetOrdinal("Price");
+                        int DescriptionIndex = reader.GetOrdinal("Description");
+                        int ImageIndex = reader.GetOrdinal("Image");
+                        int CategoryIDIndex = reader.GetOrdinal("CategoryID");
+
+
+                        while (reader.Read())
+                        {
+                            products.Add(new Product
+                            {
+                                ProductID = reader.GetInt32(ProductIDIndex),
+                                Name = reader.GetString(ProductNameIndex),
+                                Price = reader.GetDecimal(PriceIndex),
+                                Description = reader.GetString(DescriptionIndex),
+                                Image = reader.GetString(ImageIndex),
+                                CategoryID = reader.GetInt32(CategoryIDIndex),
+                            });
+                        }
+
+                    }
+                    
+                    totalRowCount = (int)cmd.Parameters["@RecordCount"].Value;
+                    products.TrimExcess();
+
+
+                    return products;
+                }
+                catch
+                {
+                    // Kastar ett eget undantag om ett undantag kastas.
+                    throw new ApplicationException("An error occured in the data access layer.");
+                }
+            }
+        }
+        public IEnumerable<Product> GetProductPageWiseByCatID(int categoryID, int maximumRows, int startRowIndex, out int totalRowCount)
+        {
+            using (SqlConnection conn = CreateConnection())
+            {
+                try
+                {
+
+                    SqlCommand cmd = new SqlCommand("appSchema.uspGetProductPageWiseByCatID", conn);
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    cmd.Parameters.AddWithValue("@CategoryID", categoryID);
+                    //cmd.Parameters.Add("@CategoryID", SqlDbType.Int, 4).Value = categoryID;
+                    cmd.Parameters.Add("@PageIndex", SqlDbType.Int, 6).Value = startRowIndex / maximumRows + 1;
+                    cmd.Parameters.Add("@PageSize", SqlDbType.Int, 6).Value = maximumRows;
+                    cmd.Parameters.Add("@RecordCount", SqlDbType.Int, 4).Direction = ParameterDirection.Output;
+                    List<Product> products = new List<Product>(100);
+
+                    conn.Open();
+
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        var ProductIDIndex = reader.GetOrdinal("ProductID");
+                        int ProductNameIndex = reader.GetOrdinal("Name");
+                        int PriceIndex = reader.GetOrdinal("Price");
+                        int DescriptionIndex = reader.GetOrdinal("Description");
+                        int ImageIndex = reader.GetOrdinal("Image");
+                        int CategoryIDIndex = reader.GetOrdinal("CategoryID");
+
+
+                        while (reader.Read())
+                        {
+                            products.Add(new Product
+                            {
+                                ProductID = reader.GetInt32(ProductIDIndex),
+                                Name = reader.GetString(ProductNameIndex),
+                                Price = reader.GetDecimal(PriceIndex),
+                                Description = reader.GetString(DescriptionIndex),
+                                Image = reader.GetString(ImageIndex),
+                                CategoryID = reader.GetInt32(CategoryIDIndex),
+                            });
+                        }
+
+                    }
+
+                    totalRowCount = (int)cmd.Parameters["@RecordCount"].Value;
+                    products.TrimExcess();
+
+
+                    return products;
+                }
+                catch
+                {
+                    // Kastar ett eget undantag om ett undantag kastas.
+                    throw new ApplicationException("An error occured in the data access layer.");
+                }
+            }
+        }
+        public IEnumerable<Product> GetProductPageWiseByTitle(string title, int maximumRows, int startRowIndex, out int totalRowCount)
+        {
+            using (SqlConnection conn = CreateConnection())
+            {
+                try
+                {
+
+                    SqlCommand cmd = new SqlCommand("appSchema.uspGetProductPageWiseByTitle", conn);
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    cmd.Parameters.AddWithValue("@Title", title);
+                    
+
+                    cmd.Parameters.Add("@PageIndex", SqlDbType.Int, 6).Value = startRowIndex / maximumRows + 1;
+                    cmd.Parameters.Add("@PageSize", SqlDbType.Int, 6).Value = maximumRows;
+                    cmd.Parameters.Add("@RecordCount", SqlDbType.Int, 4).Direction = ParameterDirection.Output;
+                    List<Product> products = new List<Product>(100);
+
+                    conn.Open();
+
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        var ProductIDIndex = reader.GetOrdinal("ProductID");
+                        int ProductNameIndex = reader.GetOrdinal("Name");
+                        int PriceIndex = reader.GetOrdinal("Price");
+                        int DescriptionIndex = reader.GetOrdinal("Description");
+                        int ImageIndex = reader.GetOrdinal("Image");
+                        int CategoryIDIndex = reader.GetOrdinal("CategoryID");
+
+
+                        while (reader.Read())
+                        {
+                            products.Add(new Product
+                            {
+                                ProductID = reader.GetInt32(ProductIDIndex),
+                                Name = reader.GetString(ProductNameIndex),
+                                Price = reader.GetDecimal(PriceIndex),
+                                Description = reader.GetString(DescriptionIndex),
+                                Image = reader.GetString(ImageIndex),
+                                CategoryID = reader.GetInt32(CategoryIDIndex),
+                            });
+                        }
+
+                    }
+
+                    totalRowCount = (int)cmd.Parameters["@RecordCount"].Value;
+                    products.TrimExcess();
+
+
+                    return products;
+                }
+                catch
+                {
+                    // Kastar ett eget undantag om ett undantag kastas.
+                    throw new ApplicationException("An error occured in the data access layer.");
+                }
+            }
+        }
+        public IEnumerable<Product> GetProductPageWiseByCatIDAndTitle(string title, int categoryID, int maximumRows, int startRowIndex, out int totalRowCount)
+        {
+            using (SqlConnection conn = CreateConnection())
+            {
+                try
+                {
+
+                    SqlCommand cmd = new SqlCommand("appSchema.uspGetProductPageWiseByCatIDAndTitle", conn);
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    cmd.Parameters.AddWithValue("@Title", title);
+                    cmd.Parameters.AddWithValue("@CategoryID", categoryID);
+                    
+                    cmd.Parameters.Add("@PageIndex", SqlDbType.Int, 6).Value = startRowIndex / maximumRows + 1;
+                    cmd.Parameters.Add("@PageSize", SqlDbType.Int, 6).Value = maximumRows;
+                    cmd.Parameters.Add("@RecordCount", SqlDbType.Int, 4).Direction = ParameterDirection.Output;
+                    List<Product> products = new List<Product>(100);
+
+                    conn.Open();
+
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        var ProductIDIndex = reader.GetOrdinal("ProductID");
+                        int ProductNameIndex = reader.GetOrdinal("Name");
+                        int PriceIndex = reader.GetOrdinal("Price");
+                        int DescriptionIndex = reader.GetOrdinal("Description");
+                        int ImageIndex = reader.GetOrdinal("Image");
+                        int CategoryIDIndex = reader.GetOrdinal("CategoryID");
+
+
+                        while (reader.Read())
+                        {
+                            products.Add(new Product
+                            {
+                                ProductID = reader.GetInt32(ProductIDIndex),
+                                Name = reader.GetString(ProductNameIndex),
+                                Price = reader.GetDecimal(PriceIndex),
+                                Description = reader.GetString(DescriptionIndex),
+                                Image = reader.GetString(ImageIndex),
+                                CategoryID = reader.GetInt32(CategoryIDIndex),
+                            });
+                        }
+
+                    }
+
+                    totalRowCount = (int)cmd.Parameters["@RecordCount"].Value;
+                    products.TrimExcess();
+
+
+                    return products;
+                }
+                catch
+                {
+                    // Kastar ett eget undantag om ett undantag kastas.
+                    throw new ApplicationException("An error occured in the data access layer.");
+                }
+            }
+        }
         public void DeleteProduct(int ID)
         {
 

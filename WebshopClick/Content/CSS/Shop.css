@@ -26,9 +26,28 @@ footer, header, hgroup, menu, nav, section {
 }
 body {
 }
+#logo{
+    display:inline;
+    float:left;
+    background-color:darkred;
+    height:115px;
+}
+#ContentPlaceHolder1_TxtSearch{
+    width:40%;
+    height:10%;
+    display:inline;
+    margin-bottom:2%;
+}
+#ContentPlaceHolder1_ImgSearch{
+    width:5%;
+    height:5%;
+    display:inline;
+}
+
 
 #shop_login{
-    width:100%;
+    display:inline;
+    
     margin-left:2%;
     background-color:darkred;
     height:115px;
@@ -39,12 +58,14 @@ body {
     display:inline;
 }
 #shop_header{
+    display:inline;
     float:left;
     width:80%;
     background-color:darkred;
     text-align:center;
 }
 h1{
+    display:inline;
     color:white;
     padding-top:2%;
     padding-bottom:2%;

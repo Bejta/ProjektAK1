@@ -4,7 +4,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="admin_content" runat="server">
-    <asp:ValidationSummary runat="server" CssClass="validation-summary-errors" />
+    <asp:ValidationSummary runat="server" CssClass="validation-summary-errors" ValidationGroup="ProductUpload" />
             <asp:FormView ID="ProductFormView" runat="server"
                 ItemType="WebshopClick.Model.BLL.Product"
                 DataKeyNames="ProductID"
@@ -17,29 +17,36 @@
                         <label for="Name">Namn</label>
                     </div>
                     <div class="editor-field">
-                        <asp:TextBox ID="Name" runat="server" Text='<%# BindItem.Name %>' />
+                        <asp:RequiredFieldValidator Display="None" ID="RequiredFieldValidator1" runat="server" ErrorMessage="Ett namn måste anges." ControlToValidate="Name" ValidationGroup="ProductUpload"></asp:RequiredFieldValidator>
+                        <asp:TextBox ID="Name" runat="server" Text='<%# BindItem.Name %>' MaxLength="40" />
                     </div>
                     <div class="editor-label">
                         <label for="Price">Priset</label>
                     </div>
                     <div class="editor-field">
+                        <asp:RegularExpressionValidator Display="None" ID="RegularExpressionValidator2" runat="server" ErrorMessage="Priset är inte i rätt format." ControlToValidate="Price" ValidationGroup="ProductUpload" ValidationExpression='"^\d ValidationExpression="^\d+(.\d{1,2})?$" +(.\d{1,2})?$"'></asp:RegularExpressionValidator>
+                        <asp:RequiredFieldValidator Display="None" ID="RequiredFieldValidator4" runat="server" ErrorMessage="Ett namn måste anges." ControlToValidate="Price" ValidationGroup="ProductUpload"></asp:RequiredFieldValidator>
                         <asp:TextBox ID="Price" runat="server" Text='<%# BindItem.Price %>' />
                     </div>
                     <div class="editor-label">
                         <label for="Description">Beskrivning</label>
                     </div>
                     <div class="editor-field">
-                        <asp:TextBox ID="Description" TextMode="MultiLine" Rows="5" runat="server" Text='<%# BindItem.Description %>' />
+                        <asp:RequiredFieldValidator Display="None" ID="RequiredFieldValidator2" runat="server" ErrorMessage="En beskrivning måste anges." ControlToValidate="Description" ValidationGroup="ProductUpload"></asp:RequiredFieldValidator>
+                        <asp:TextBox ID="Description" TextMode="MultiLine" Rows="5" runat="server" Text='<%# BindItem.Description %>' MaxLength="200" />
                     </div>
                     <div class="editor-label">
                         <label for="Image">Bild</label>
                     </div>
                     <div class="editor-field">
-                        <asp:TextBox ID="AddImage" runat="server" Text='<%# BindItem.Image %>' />
+                        <asp:TextBox ID="AddImage" runat="server" Text='<%# BindItem.Image %>' Enabled="False" />
                     </div>
                     <div>
                         <asp:LinkButton runat="server" Text="Spara" CommandName="Update" />
-                        <asp:HyperLink runat="server" Text="Avbryt" NavigateUrl='<%# GetRouteUrl("Aproducts") %>' />
+                        <asp:LinkButton ID="BackProducts" OnClick="BackToProducts_Click" Text="Avbryt" runat="server" />
+                        
+                        <%--<asp:HyperLink runat="server" Text="Avbryt" NavigateUrl='<%# GetRouteUrl("AProducts") %>'></asp:HyperLink>
+                        <asp:HyperLink runat="server" Text="Avbryt" NavigateUrl='<%# GetRouteUrl("AProducts") %>' />--%>
                     </div>
                     <div class="editor-field">
                      <asp:DropDownList ID="CategoryDropDownList" runat="server"

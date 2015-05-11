@@ -32,6 +32,11 @@ footer, header, hgroup, menu, nav, section {
     background-color:orangered;
     text-align:center;
 }
+.imagesDetails{
+    height:360px;
+    width:250px;
+}
+
 h1{
     color:white;
     padding-top:2%;

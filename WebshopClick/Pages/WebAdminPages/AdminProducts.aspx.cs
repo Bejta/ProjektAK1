@@ -19,17 +19,79 @@ namespace WebshopClick.Pages.WebAdminPages
         }
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            //if (IsPostBack==false)
+            //{
+            //    Session["filter"] = CategoryDropDownList.SelectedValue;
+            //    //productList.SelectMethod = "ProductListView_GetData";
+            //}
+            //if (CategoryDropDownList.SelectedValue != "")
+            //{
+            //    Session["filter"] = CategoryDropDownList.SelectedValue;
+                
+            //}
+            
+            //if (CategoryDropDownList.SelectedItem.Value=="Välj kategori")
+            //int categoryID = Int32.Parse(CategoryDropDownList.SelectedItem.Value);
         }
-        public IEnumerable<Product> ProductListView_GetData()
+        public IEnumerable<Product> ProductListView_GetData(int maximumRows, int startRowIndex, out int totalRowCount)
         {
             try
             {
-                return Service.GetProduct();
+                if (CategoryDropDownList.SelectedValue != "-- Välj kategori --")
+                {
+                    int fil = Int32.Parse(CategoryDropDownList.SelectedValue);
+                    return Service.GetProductPageWiseByCatID(fil, maximumRows, startRowIndex, out totalRowCount);
+                }
+           
+            return Service.GetProductPageWise(maximumRows, startRowIndex, out totalRowCount);
             }
             catch (Exception)
             {
                 ModelState.AddModelError(String.Empty, "Ett oväntat fel inträffade då produktuppgifter skulle hämtas.");
+                totalRowCount = 0;
+                return null;
+            }
+        }
+        //public IEnumerable<Product> ProductListView_GetDataByCatID(int categoryID, int maximumRows, int startRowIndex, out int totalRowCount)
+        //{
+        //    try
+        //    {
+
+        //        return Service.GetProductPageWiseByCatID(34, maximumRows, startRowIndex, out totalRowCount);
+        //    }
+        //    catch (Exception)
+        //    {
+        //        ModelState.AddModelError(String.Empty, "Ett oväntat fel inträffade då produktuppgifter skulle hämtas.");
+        //        totalRowCount = 0;
+        //        return null;
+        //    }
+        //}
+        //public IEnumerable<Product> ProductListView_GetData()
+        //{
+        //    try
+        //    {
+        //        return Service.GetProduct();
+        //    }
+        //    catch (Exception)
+        //    {
+        //        ModelState.AddModelError(String.Empty, "Ett oväntat fel inträffade då produktuppgifter skulle hämtas.");
+        //        return null;
+        //    }
+        //}
+        protected void SelectionHasChanged(Object sender, System.EventArgs e)
+        {
+            //productList.SelectMethod = "ProductListView_GetData";
+            productList.DataBind();
+        }
+        public IEnumerable<Category> CategoryDropDownList_GetData()
+        {
+            try
+            {
+                return Service.GetCategory();
+            }
+            catch (Exception)
+            {
+                ModelState.AddModelError(String.Empty, "Ett oväntat fel inträffade då kategoriuppgifter skulle hämtas.");
                 return null;
             }
         }

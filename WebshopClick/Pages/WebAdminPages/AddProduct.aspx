@@ -7,7 +7,7 @@
     <asp:ValidationSummary
          runat="server" 
         CssClass="validation-summary-errors"
-        ValidationGroup="ProductUpload" />
+        ValidationGroup="ProductUpload" ID="Validation" />
     <asp:FormView ID="ProductFormView" runat="server"
         ItemType="WebshopClick.Model.BLL.Product"
         DefaultMode="Insert"
@@ -18,19 +18,23 @@
                 <label for="Name">Namn</label>
             </div>
             <div class="editor-field">
-                <asp:TextBox ID="Name" runat="server" Text='<%# BindItem.Name %>' />
+                <asp:RequiredFieldValidator Display="None" ID="RequiredFieldValidator1" runat="server" ErrorMessage="Ett namn måste anges." ControlToValidate="Name" ValidationGroup="ProductUpload"></asp:RequiredFieldValidator>
+                <asp:TextBox ID="Name" runat="server" Text='<%# BindItem.Name %>' MaxLength="40" />
             </div>
             <div class="editor-label">
                 <label for="Priset">Priset</label>
             </div>
             <div class="editor-field">
+                <asp:RegularExpressionValidator Display="None" ID="RegularExpressionValidator2" runat="server" ErrorMessage="Priset är inte i rätt format." ControlToValidate="Priset" ValidationGroup="ProductUpload" ValidationExpression='"^\d ValidationExpression="^\d+(.\d{1,2})?$" +(.\d{1,2})?$"'></asp:RegularExpressionValidator>
+                <asp:RequiredFieldValidator Display="None" ID="RequiredFieldValidator4" runat="server" ErrorMessage="Ett namn måste anges." ControlToValidate="Priset" ValidationGroup="ProductUpload"></asp:RequiredFieldValidator>
                 <asp:TextBox ID="Priset" runat="server" Text='<%# BindItem.Price %>' />
             </div>
             <div class="editor-label">
                 <label for="Description">Beskrivning</label>
             </div>
             <div class="editor-field">
-                <asp:TextBox TextMode="MultiLine" Rows="5" ID="Description" runat="server" Text='<%# BindItem.Description %>' />
+                <asp:RequiredFieldValidator Display="None" ID="RequiredFieldValidator2" runat="server" ErrorMessage="En beskrivning måste anges." ControlToValidate="Description" ValidationGroup="ProductUpload"></asp:RequiredFieldValidator>
+                <asp:TextBox TextMode="MultiLine" Rows="5" ID="Description" runat="server" Text='<%# BindItem.Description %>' MaxLength="200" />
             </div>
             <div class="editor-label">
                 <label for="CategoryDropDownList">Kategori</label>
@@ -50,7 +54,8 @@
                 <div class="editor-label">
                     <label for="AddImage">Bild</label>
                 </div>
-                <asp:TextBox ID="AddImage" runat="server" Text='<%# BindItem.Image %>' Enabled="false"/>
+                <asp:RequiredFieldValidator Display="None" ID="RequiredFieldValidator3" runat="server" ErrorMessage="Ett bildnamn måste anges." ControlToValidate="AddImage" ValidationGroup="ProductUpload"></asp:RequiredFieldValidator>
+                <asp:TextBox ID="AddImage" runat="server" Text='<%# BindItem.Image %>' Enabled="false" MaxLength="50" />
             </div>
 
 
@@ -74,7 +79,7 @@
              <asp:RequiredFieldValidator 
                 ID="RequiredFieldValidator1" 
                 runat="server" 
-                ErrorMessage="En fil måste väljas" 
+                ErrorMessage="En fil måste finns" 
                 ControlToValidate="FileUpload" 
                 Display="None"
                 ValidationGroup="ImageUpload">

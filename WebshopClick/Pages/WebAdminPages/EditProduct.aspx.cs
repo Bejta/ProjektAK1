@@ -57,6 +57,10 @@ namespace WebshopClick.Pages.WebAdminPages
                 txt.Text = "unknown.jpg";
             }
         }
+        protected void BackToProducts_Click(object sender, EventArgs e)
+        {
+            Response.RedirectToRoute("AProducts");
+        }
         public IEnumerable<Category> CategoryDropDownList_GetData()
         {
             try

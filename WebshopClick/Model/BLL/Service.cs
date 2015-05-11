@@ -16,11 +16,21 @@ namespace WebshopClick.Model.BLL
         private GradeDAL _gradeDAL;
         private TaxDAL _taxDAL;
         private ProductDAL _productDAL;
+        private OrderDAL _orderDAL;
+        private UserDAL _userDAL;
 
 
         private CategoryDAL CategoryDAL
         {
             get { return _categoryDAL ?? (_categoryDAL = new CategoryDAL()); }
+        }
+        private OrderDAL OrderDAL
+        {
+            get { return _orderDAL ?? (_orderDAL = new OrderDAL()); }
+        }
+        private UserDAL UserDAL
+        {
+            get { return _userDAL ?? (_userDAL = new UserDAL()); }
         }
         private ProductDAL ProductDAL
         {
@@ -232,6 +242,22 @@ namespace WebshopClick.Model.BLL
         {
             return ProductDAL.GetProduct();
         }
+        public IEnumerable<Product> GetProductPageWise(int maximumRows, int startRowIndex, out int totalRowCount)
+        {
+            return ProductDAL.GetProductPageWise(maximumRows, startRowIndex, out totalRowCount);
+        }
+        public IEnumerable<Product> GetProductPageWiseByCatID(int categoryID, int maximumRows, int startRowIndex, out int totalRowCount)
+        {
+            return ProductDAL.GetProductPageWiseByCatID(categoryID, maximumRows, startRowIndex, out totalRowCount);
+        }
+        public IEnumerable<Product> GetProductPageWiseByCatIDAndTitle(string title, int categoryID, int maximumRows, int startRowIndex, out int totalRowCount)
+        {
+            return ProductDAL.GetProductPageWiseByCatIDAndTitle(title,categoryID, maximumRows, startRowIndex, out totalRowCount);
+        }
+        public IEnumerable<Product> GetProductPageWiseByTitle(string title, int maximumRows, int startRowIndex, out int totalRowCount)
+        {
+            return ProductDAL.GetProductPageWiseByTitle(title, maximumRows, startRowIndex, out totalRowCount);
+        }
         public Product GetProductByID(int id)
         {
             return ProductDAL.GetProductById(id);
@@ -259,6 +285,63 @@ namespace WebshopClick.Model.BLL
                 ProductDAL.UpdateProduct(product);
             }
 
+        }
+
+        public Order GetOrder(int id)
+        {
+            return OrderDAL.GetOrderById(id);
+        }
+        public IEnumerable<Order> GetOrder()
+        {
+            return OrderDAL.GetOrder();
+        }
+        public IEnumerable<Order> GetOrderPageWise(int maximumRows, int startRowIndex, out int totalRowCount)
+        {
+            return OrderDAL.GetOrderPageWise(maximumRows, startRowIndex, out totalRowCount);
+        }
+        public IEnumerable<Order> GetOrderPageWiseByStatus(int statusID, int maximumRows, int startRowIndex, out int totalRowCount)
+        {
+            return OrderDAL.GetOrderPageWiseByStatus(statusID, maximumRows, startRowIndex, out totalRowCount);
+        }
+        
+        public Order GetOrderByID(int id)
+        {
+            return OrderDAL.GetOrderById(id);
+        }
+        public void DeleteOrder(int ID)
+        {
+            OrderDAL.DeleteOrder(ID);
+        }
+        public void UpdateOrder(Order order)
+        {
+
+            ICollection<ValidationResult> validationResults;
+            if (!order.Validate(out validationResults))
+            {
+                var ex = new ValidationException("Objektet klarade inte valideringen.");
+                ex.Data.Add("ValidationResults", validationResults);
+                throw ex;
+            }
+            if (order.OrderID == 0) // New post if ID is 0!
+            {
+                OrderDAL.InsertOrder(order);
+            }
+            else
+            {
+                OrderDAL.UpdateOrder(order);
+            }
+        }
+        public User GetUser(int id)
+        {
+            return UserDAL.GetUserById(id);
+        }
+        public IEnumerable<User> GetUser()
+        {
+            return UserDAL.GetUser();
+        }
+        public User GetUserByID(int id)
+        {
+            return UserDAL.GetUserById(id);
         }
     }
 }
