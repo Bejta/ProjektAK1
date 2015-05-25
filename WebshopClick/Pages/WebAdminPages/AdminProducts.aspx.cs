@@ -52,32 +52,7 @@ namespace WebshopClick.Pages.WebAdminPages
                 return null;
             }
         }
-        //public IEnumerable<Product> ProductListView_GetDataByCatID(int categoryID, int maximumRows, int startRowIndex, out int totalRowCount)
-        //{
-        //    try
-        //    {
-
-        //        return Service.GetProductPageWiseByCatID(34, maximumRows, startRowIndex, out totalRowCount);
-        //    }
-        //    catch (Exception)
-        //    {
-        //        ModelState.AddModelError(String.Empty, "Ett oväntat fel inträffade då produktuppgifter skulle hämtas.");
-        //        totalRowCount = 0;
-        //        return null;
-        //    }
-        //}
-        //public IEnumerable<Product> ProductListView_GetData()
-        //{
-        //    try
-        //    {
-        //        return Service.GetProduct();
-        //    }
-        //    catch (Exception)
-        //    {
-        //        ModelState.AddModelError(String.Empty, "Ett oväntat fel inträffade då produktuppgifter skulle hämtas.");
-        //        return null;
-        //    }
-        //}
+       
         protected void SelectionHasChanged(Object sender, System.EventArgs e)
         {
             //productList.SelectMethod = "ProductListView_GetData";
@@ -95,6 +70,7 @@ namespace WebshopClick.Pages.WebAdminPages
                 return null;
             }
         }
+        
         public void ProductListView_DeleteItem(int ProductID)
         {
             try

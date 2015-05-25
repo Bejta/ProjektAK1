@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Pages/Shared/WebAdmin.Master" AutoEventWireup="true" CodeBehind="AdminOrders.aspx.cs" Inherits="WebshopClick.Pages.WebAdminPages.AdminOrders" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Pages/Shared/WebAdmin.Master" AutoEventWireup="true" CodeBehind="AdminOrders.aspx.cs" Inherits="WebshopClick.Pages.WebAdminPages.AdminOrders" EnableViewState="false" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
@@ -13,22 +13,22 @@
                OnSelectedIndexChanged="SelectionHasChanged"
                AutoPostBack="True"
                AppendDataBoundItems="true">
-                    <asp:ListItem>-- Välj status type --</asp:ListItem>
+                    <asp:ListItem>-- Välj status --</asp:ListItem>
                </asp:DropDownList>
         </div>
          <asp:ValidationSummary ID="ValidationSummaryCategory" runat="server" />
             <asp:ListView ID="OrderListView" runat="server"
                 ItemType="WebshopClick.Model.BLL.Order"
                 SelectMethod="OrderListView_GetData"
-                <%--InsertMethod="OrderListView_InsertItem"--%>
                 UpdateMethod="OrderListView_UpdateItem"
                 DeleteMethod="OrderListView_DeleteItem"
                 DataKeyNames="OrderID"
-                InsertItemPosition="FirstItem">
+                >
                 <LayoutTemplate>
                     <table class="gridAdmin">
-                        <tr>
-                            <th>
+                        <thead>
+                        <tr>    
+                            <th colspan="2">
                                 Kund
                             </th>
                             <th>
@@ -41,7 +41,7 @@
                                 Postnummer
                             </th>
                             <th>
-                                Ort
+                                Postort
                             </th>
                             <th>
                                 Betalningstyp
@@ -52,21 +52,27 @@
                             <th>
                             </th>
                         </tr>
-
+                        </thead>
                         <asp:PlaceHolder ID="itemPlaceholder" runat="server" />
+                        <asp:DataPager ID="DataPager" runat="server" PageSize="12" >      
+                        <Fields>
+                            <asp:NextPreviousPagerField ShowFirstPageButton="True" FirstPageText=" Första "
+                            ShowNextPageButton="False" ShowPreviousPageButton="False"  />
+                        <asp:NumericPagerField />
+                        <asp:NextPreviousPagerField ShowLastPageButton="True" LastPageText=" Sista "
+                            ShowNextPageButton="False" ShowPreviousPageButton="False"  />
+                        </Fields>
+               </asp:DataPager>
                     </table>
                 </LayoutTemplate>
                 <ItemTemplate>
 <%-- New rows --%>
                     <tr>
                         <td>
-                            <asp:DropDownList ID="DropDownList2" runat="server"
-                             ItemType="WebshopClick.Model.BLL.Users"
-                             SelectMethod="UsersDropDownList_GetData"
-                             DataTextField="Name"
-                             DataValueField="UserID"
-                             SelectedValue='<%# Item.UserID %>'
-                             Enabled="false" />
+                            <asp:HiddenField ID="HiddenField1" runat="server" Value='<%# BindItem.OrderID %>'  />
+                        </td>
+                        <td>
+                            <%#: Item.Name %>
                         </td>
                         
                         <td>
@@ -94,16 +100,17 @@
                         <asp:DropDownList ID="DropDownList1" runat="server"
                              ItemType="WebshopClick.Model.BLL.Status"
                              SelectMethod="StatusDropDownList_GetData"
+                             DataKeyNames="StatusID"
                              DataTextField="StatusType"
                              DataValueField="StatusID"
                              SelectedValue='<%# Item.StatusID %>'
                              Enabled="false" />
                         </td>
-                        <td class="command">
-                            <asp:LinkButton runat="server" CommandName="Delete" Text="Ta bort" CausesValidation="false" 
+                        <td >
+                            <asp:Button class="command" UseSubmitBehavior="False" ID="Button1" runat="server" CommandName="Delete" Text="Ta bort" CausesValidation="false" 
                               OnClientClick="return confirm('Ta bort beställning permanent?');" />
-                            <asp:LinkButton runat="server" CommandName="Edit" Text="Redigera" CausesValidation="false" />
-                            <asp:LinkButton runat="server"  ID="BtnOrderDetails" Text="Detaljer" CausesValidation="false" OnClick="BtnOrderDetails_Click" />
+                            <asp:Button class="command" UseSubmitBehavior="False" CommandName="Edit" ID="Button2" runat="server" Text="Uppdatera status" />
+                            <asp:Button class="command" UseSubmitBehavior="False" runat="server"  ID="BtnOrderDetails" Text="Detaljer" CausesValidation="false" OnClick="BtnOrderDetails_Click" />
                         </td>
                     </tr>
                 </ItemTemplate>
@@ -117,28 +124,17 @@
                         </tr>
                     </table>
                 </EmptyDataTemplate>
-                <%--<InsertItemTemplate>
-                    <tr>
-                        <td>
-                            <asp:TextBox ID="Name" MaxLength="30" runat="server" Text='<%# BindItem.CategoryName %>' />
-                        </td>
-                        <td>
-                            <asp:LinkButton runat="server" CommandName="Insert" Text="Lägg till" />
-                            <asp:LinkButton runat="server" CommandName="Cancel" Text="Rensa" CausesValidation="false" />
-                        </td>
-                    </tr>
-                </InsertItemTemplate>--%>
+ 
                 <EditItemTemplate>
                     <tr>
+                        
+                            <asp:HiddenField ID="HiddenField1" runat="server" Value='<%# BindItem.OrderID %>'  />
+                       
                         <td>
-                            
-                            <asp:DropDownList ID="DropDownList2" runat="server"
-                             ItemType="WebshopClick.Model.BLL.Users"
-                             SelectMethod="UsersDropDownList_GetData"
-                             DataTextField="Name"
-                             DataValueField="UserID"
-                             SelectedValue='<%# Item.UserID %>'
-                             Enabled="false" />
+                            <asp:HiddenField ID="HiddenFieldButton" runat="server" Value='<%# BindItem.UserID %>'  />
+                        </td>
+                        <td>
+                            <asp:TextBox ID="TextBox5" runat="server" Enabled="false" Text='<%# BindItem.Name %>' />
                         </td>
                         <td>
                             
@@ -162,19 +158,23 @@
                              SelectedValue='<%# Item.PaymentID %>'
                              Enabled="false" />
                         </td>
-                        <td>
-                        <asp:DropDownList ID="DropDownList1" runat="server"
-                             ItemType="WebshopClick.Model.BLL.Status"
-                             SelectMethod="StatusDropDownList_GetData"
-                             DataTextField="StatusType"
-                             DataValueField="StatusID"
-                             SelectedValue='<%# Item.StatusID %>'
-                             Enabled="true" />
+                        
+                        
+                        <td>  
+                            <!-- BindItem.StatusID  IMPORTANT! not Item.StatusID -->
+                            <asp:DropDownList ID="LineDropDownList" runat="server"
+                                    ItemType="WebshopClick.Model.BLL.Status"
+                                    SelectMethod="StatusDropDownList_GetData"
+                                    DataTextField="StatusType"
+                                    DataValueField="StatusID"
+                                    SelectedValue='<%# BindItem.StatusID %>' 
+                                    Enabled="true" />
                         </td>
                         <td>
+
+                            <asp:Button class="command" UseSubmitBehavior="False" runat="server" CommandName="Update" Text="Spara" CausesValidation="false" />
+                            <asp:Button class="command" UseSubmitBehavior="False" runat="server" CommandName="Cancel" Text="Avbryt" CausesValidation="false" />
                             
-                            <asp:LinkButton runat="server" CommandName="Update" Text="Spara" CausesValidation="false" />
-                            <asp:LinkButton runat="server" CommandName="Cancel" Text="Avbryt" CausesValidation="false" />
                         </td>
                     </tr>
                 </EditItemTemplate>

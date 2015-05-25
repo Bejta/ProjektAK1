@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Error.aspx.cs" Inherits="WebshopClick.Pages.Shared.Error" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Error.aspx.cs" Inherits="WebshopClick.Pages.Shared.Error" ViewStateMode="Disabled" %>
 
 <!DOCTYPE html>
 

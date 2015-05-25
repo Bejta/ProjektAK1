@@ -9,7 +9,7 @@ namespace WebshopClick.Model.BLL
     public class User
     {
 
-        [Required(ErrorMessage = "Ett kategori måste anges")]
+        [Required(ErrorMessage = "Ett userID måste anges")]
         [Range(0, Int32.MaxValue, ErrorMessage = "Ett heltal måste anges.")]
         public int UserID { get; set; }
 

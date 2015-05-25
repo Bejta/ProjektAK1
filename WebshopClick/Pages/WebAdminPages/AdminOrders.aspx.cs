@@ -10,34 +10,7 @@ namespace WebshopClick.Pages.WebAdminPages
 {
     public partial class AdminOrders : System.Web.UI.Page
     {
-        /// <summary>
-        /// DropDownList1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DropDownList1;
-        /// <summary>
-        /// DropDownList2 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DropDownList2;
 
-        /// <summary>
-        /// PaymentDropDownList control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList PaymentDropDownList;
-
-        
-        
         private Service _service;
 
         private Service Service
@@ -48,9 +21,26 @@ namespace WebshopClick.Pages.WebAdminPages
         {
 
         }
-        public IEnumerable<Order> OrderListView_GetData()
+        public IEnumerable<Order> OrderListView_GetData(int maximumRows, int startRowIndex, out int totalRowCount)
         {
-            return Service.GetOrder();
+
+            try
+            {
+                if (StatusDropDownList.SelectedValue != "-- Välj status --")
+                {
+                    int fil = Int32.Parse(StatusDropDownList.SelectedValue);
+                    return Service.GetOrderPageWiseByStatus(fil, maximumRows, startRowIndex, out totalRowCount);
+                }
+
+                return Service.GetOrderPageWise(maximumRows, startRowIndex, out totalRowCount);
+            }
+            catch (Exception)
+            {
+                ModelState.AddModelError(String.Empty, "Ett oväntat fel inträffade då produktuppgifter skulle hämtas.");
+                totalRowCount = 0;
+                return null;
+            }
+            //return Service.GetOrderPageWise(maximumRows, startRowIndex, out totalRowCount);
         }
         public IEnumerable<Status> StatusDropDownList_GetData()
         {
@@ -76,18 +66,12 @@ namespace WebshopClick.Pages.WebAdminPages
                 return null;
             }
         }
-        public IEnumerable<User> UserDropDownList_GetData()
+        protected void SelectionHasChanged(Object sender, System.EventArgs e)
         {
-            try
-            {
-                return Service.GetUser();
-            }
-            catch (Exception)
-            {
-                ModelState.AddModelError(String.Empty, "Ett oväntat fel inträffade då kundsuppgifter skulle hämtas.");
-                return null;
-            }
+            //productList.SelectMethod = "ProductListView_GetData";
+            OrderListView.DataBind();
         }
+       
         public void OrderListView_DeleteItem(int OrderID)
         {
             try
@@ -110,8 +94,7 @@ namespace WebshopClick.Pages.WebAdminPages
                 if (order == null)
                 {
 
-                    ModelState.AddModelError(String.Empty,
-                        String.Format("Beställning hittades inte.", OrderID));
+                    ModelState.AddModelError(String.Empty,String.Format("Beställning hittades inte.", OrderID));
                     return;
                 }
 
@@ -119,7 +102,7 @@ namespace WebshopClick.Pages.WebAdminPages
                 {
                     Service.UpdateOrder(order);
                     //Session["Success"] = true;
-                    Response.RedirectToRoute("Alogin");// PRG - POST->Redirect->GET
+                    //Response.RedirectToRoute("Alogin");// PRG - POST->Redirect->GET
                 }
             }
             catch (Exception)
@@ -131,7 +114,10 @@ namespace WebshopClick.Pages.WebAdminPages
 
         protected void BtnOrderDetails_Click(object sender, EventArgs e)
         {
-
+            Button lb = (Button)sender;
+            HiddenField hf = (HiddenField)lb.FindControl("HiddenField1");
+            int id = Convert.ToInt32(hf.Value);
+            Response.RedirectToRoute("AdminOrderdetails", new { OrderID = id });
         }
     }
 }

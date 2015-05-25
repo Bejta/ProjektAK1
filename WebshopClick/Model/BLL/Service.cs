@@ -17,9 +17,14 @@ namespace WebshopClick.Model.BLL
         private TaxDAL _taxDAL;
         private ProductDAL _productDAL;
         private OrderDAL _orderDAL;
+        private OrderrowDAL _orderrowDAL;
         private UserDAL _userDAL;
+        private ViewOrderDetailsDAL _vieworderdetailsDAL;
 
-
+        private ViewOrderDetailsDAL ViewOrderDetailsDAL
+        {
+            get { return _vieworderdetailsDAL ?? (_vieworderdetailsDAL = new ViewOrderDetailsDAL()); }
+        }
         private CategoryDAL CategoryDAL
         {
             get { return _categoryDAL ?? (_categoryDAL = new CategoryDAL()); }
@@ -27,6 +32,10 @@ namespace WebshopClick.Model.BLL
         private OrderDAL OrderDAL
         {
             get { return _orderDAL ?? (_orderDAL = new OrderDAL()); }
+        }
+        private OrderrowDAL OrderrowDAL
+        {
+            get { return _orderrowDAL ?? (_orderrowDAL = new OrderrowDAL()); }
         }
         private UserDAL UserDAL
         {
@@ -314,7 +323,6 @@ namespace WebshopClick.Model.BLL
         }
         public void UpdateOrder(Order order)
         {
-
             ICollection<ValidationResult> validationResults;
             if (!order.Validate(out validationResults))
             {
@@ -342,6 +350,73 @@ namespace WebshopClick.Model.BLL
         public User GetUserByID(int id)
         {
             return UserDAL.GetUserById(id);
+        }
+        public void UpdateUser(User user)
+        {
+            ICollection<ValidationResult> validationResults;
+            if (!user.Validate(out validationResults))
+            {
+                var ex = new ValidationException("Objektet klarade inte valideringen.");
+                ex.Data.Add("ValidationResults", validationResults);
+                throw ex;
+            }
+            if (user.UserID == 0) // New post if ID is 0!
+            {
+                UserDAL.InsertUser(user);
+            }
+            else
+            {
+                UserDAL.UpdateUser(user);
+            }
+        }
+        public IEnumerable<Orderrow> GetOrderrow()
+        {
+            return OrderrowDAL.GetOrderrow();
+        }
+        public IEnumerable<ViewOrderDetails> GetOrderrowByOrderViewID(int orderID)
+        {
+            return ViewOrderDetailsDAL.GetOrderrowByOrderViewID(orderID);
+        }
+        public IEnumerable<Orderrow> GetOrderrowByOrderID(int orderID)
+        {
+            return OrderrowDAL.GetOrderrowByOrderID(orderID);
+        }
+        public IEnumerable<Orderrow> GetOrderrowByProductID(int productID)
+        {
+            return OrderrowDAL.GetOrderrowByProductID(productID);
+        }
+        public IEnumerable<Orderrow> GetOrderrowByProductIDAndOrderID(int productID,int orderID)
+        {
+            return OrderrowDAL.GetOrderrowByProductIDAndOrderID(productID, orderID);
+        }
+        
+
+        public Orderrow GetOrderrowByID(int id)
+        {
+            return OrderrowDAL.GetOrderrowById(id);
+        }
+        public void DeleteOrderrow(int ID)
+        {
+            OrderrowDAL.DeleteOrderrow(ID);
+        }
+        public void UpdateOrderrow(Orderrow orderrow)
+        {
+
+            ICollection<ValidationResult> validationResults;
+            if (!orderrow.Validate(out validationResults))
+            {
+                var ex = new ValidationException("Objektet klarade inte valideringen.");
+                ex.Data.Add("ValidationResults", validationResults);
+                throw ex;
+            }
+            if (orderrow.RowID == 0) // New post if ID is 0!
+            {
+                OrderrowDAL.InsertOrderrow(orderrow);
+            }
+            else
+            {
+                OrderrowDAL.UpdateOrderrow(orderrow);
+            }
         }
     }
 }

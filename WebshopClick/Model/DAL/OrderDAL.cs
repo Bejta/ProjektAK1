@@ -30,6 +30,7 @@ namespace WebshopClick.Model.DAL
                     {
                         var OrderIDIndex = reader.GetOrdinal("OrderID");
                         var UserIDIndex = reader.GetOrdinal("UserID");
+                        var NameIndex = reader.GetOrdinal("Name");
                         var DateIndex = reader.GetOrdinal("Date");
                         var AddressIndex = reader.GetOrdinal("Address");
                         int PostnumberIndex = reader.GetOrdinal("Postnumber");
@@ -44,6 +45,7 @@ namespace WebshopClick.Model.DAL
                             {
                                 OrderID = reader.GetInt32(OrderIDIndex),
                                 UserID = reader.GetInt32(UserIDIndex),
+                                Name = reader.GetString(NameIndex),
                                 Date= reader.GetDateTime(DateIndex),
                                 Address = reader.GetString(AddressIndex),
                                 Postnumber = reader.GetString(PostnumberIndex),
@@ -78,6 +80,7 @@ namespace WebshopClick.Model.DAL
                     conn.Open();
                     cmd.Parameters.Add("@OrderID", SqlDbType.Int, 4).Value = order.OrderID;
                     cmd.Parameters.Add("@UserID", SqlDbType.Int, 4).Value = order.UserID;
+                    cmd.Parameters.Add("@Name", SqlDbType.NVarChar, 50).Value = order.Name;
                     cmd.Parameters.Add("@Date", SqlDbType.DateTime,8).Value = order.Date;
                     cmd.Parameters.Add("@Address", SqlDbType.NVarChar, 30).Value = order.Address;
                     cmd.Parameters.Add("@Postnumber", SqlDbType.NVarChar, 6).Value = order.Postnumber;
@@ -103,6 +106,7 @@ namespace WebshopClick.Model.DAL
                     cmd.CommandType = CommandType.StoredProcedure;
 
                     cmd.Parameters.Add("@UserID", SqlDbType.Int, 4).Value = order.UserID;
+                    cmd.Parameters.Add("@Name", SqlDbType.NVarChar, 50).Value = order.Name;
                     cmd.Parameters.Add("@Date", SqlDbType.DateTime, 8).Value = order.Date;
                     cmd.Parameters.Add("@Address", SqlDbType.NVarChar, 30).Value = order.Address;
                     cmd.Parameters.Add("@Postnumber", SqlDbType.NVarChar, 6).Value = order.Postnumber;
@@ -147,6 +151,7 @@ namespace WebshopClick.Model.DAL
                         {
                             var OrderIDIndex = reader.GetOrdinal("OrderID");
                             var UserIDIndex = reader.GetOrdinal("UserID");
+                            var NameIndex = reader.GetOrdinal("Name");
                             var DateIndex = reader.GetOrdinal("Date");
                             var AddressIndex = reader.GetOrdinal("Address");
                             int PostnumberIndex = reader.GetOrdinal("Postnumber");
@@ -159,6 +164,7 @@ namespace WebshopClick.Model.DAL
                             {
                                 OrderID = reader.GetInt32(OrderIDIndex),
                                 UserID = reader.GetInt32(UserIDIndex),
+                                Name = reader.GetString(NameIndex),
                                 Date = reader.GetDateTime(DateIndex),
                                 Address = reader.GetString(AddressIndex),
                                 Postnumber = reader.GetString(PostnumberIndex),
@@ -197,6 +203,7 @@ namespace WebshopClick.Model.DAL
                     {
                         var OrderIDIndex = reader.GetOrdinal("OrderID");
                         var UserIDIndex = reader.GetOrdinal("UserID");
+                        var NameIndex = reader.GetOrdinal("Name");
                         var DateIndex = reader.GetOrdinal("Date");
                         var AddressIndex = reader.GetOrdinal("Address");
                         int PostnumberIndex = reader.GetOrdinal("Postnumber");
@@ -211,6 +218,7 @@ namespace WebshopClick.Model.DAL
                             {
                                 OrderID = reader.GetInt32(OrderIDIndex),
                                 UserID = reader.GetInt32(UserIDIndex),
+                                Name = reader.GetString(NameIndex),
                                 Date = reader.GetDateTime(DateIndex),
                                 Address = reader.GetString(AddressIndex),
                                 Postnumber = reader.GetString(PostnumberIndex),
@@ -242,7 +250,7 @@ namespace WebshopClick.Model.DAL
                 try
                 {
 
-                    SqlCommand cmd = new SqlCommand("appSchema.uspGetProductPageWiseByStatus", conn);
+                    SqlCommand cmd = new SqlCommand("appSchema.uspGetOrderPageWiseByStatus", conn);
                     cmd.CommandType = CommandType.StoredProcedure;
 
                     cmd.Parameters.AddWithValue("@StatusID", statusID);
@@ -258,6 +266,7 @@ namespace WebshopClick.Model.DAL
                     {
                         var OrderIDIndex = reader.GetOrdinal("OrderID");
                         var UserIDIndex = reader.GetOrdinal("UserID");
+                        var NameIndex = reader.GetOrdinal("Name");
                         var DateIndex = reader.GetOrdinal("Date");
                         var AddressIndex = reader.GetOrdinal("Address");
                         int PostnumberIndex = reader.GetOrdinal("Postnumber");
@@ -272,6 +281,7 @@ namespace WebshopClick.Model.DAL
                             {
                                 OrderID = reader.GetInt32(OrderIDIndex),
                                 UserID = reader.GetInt32(UserIDIndex),
+                                Name = reader.GetString(NameIndex),
                                 Date = reader.GetDateTime(DateIndex),
                                 Address = reader.GetString(AddressIndex),
                                 Postnumber = reader.GetString(PostnumberIndex),

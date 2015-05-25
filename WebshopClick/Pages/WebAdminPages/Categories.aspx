@@ -38,7 +38,7 @@
                     </tr>
                 </ItemTemplate>
                 <EmptyDataTemplate>
-<%-- Detta visas då linjeuppgifter saknas i databasen. --%>
+<%-- Detta visas då kategoriuppgifter saknas i databasen. --%>
                     <table class="gridAdmin">
                         <tr>
                             <td>

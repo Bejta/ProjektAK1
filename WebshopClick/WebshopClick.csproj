@@ -57,6 +57,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\CSS\Global.css" />
     <Content Include="Content\CSS\Shop.css" />
     <Content Include="Content\CSS\Style.css" />
     <Content Include="Global.asax" />
@@ -74,6 +75,7 @@
     <Content Include="Pages\WebAdminPages\AddProduct.aspx" />
     <Content Include="Pages\WebAdminPages\ADetails.aspx" />
     <Content Include="Pages\WebAdminPages\AdminLogin.aspx" />
+    <Content Include="Pages\WebAdminPages\AdminOrderdetails.aspx" />
     <Content Include="Pages\WebAdminPages\AdminOrders.aspx" />
     <Content Include="Pages\WebAdminPages\AdminProducts.aspx" />
     <Content Include="Pages\WebAdminPages\Categories.aspx" />
@@ -88,7 +90,8 @@
     <Content Include="Pages\WebAdminPages\Users.aspx" />
     <Content Include="Pages\WebShopPages\Default.aspx" />
     <Content Include="Pages\WebShopPages\Login.aspx" />
-    <Content Include="Pages\WebShopPages\Order.aspx" />
+    <Content Include="Pages\WebShopPages\OrderCart.aspx" />
+    <Content Include="Pages\WebShopPages\ProceedOrder.aspx" />
     <Content Include="Pages\WebShopPages\Productdetails.aspx" />
     <Content Include="Pages\WebShopPages\Profile.aspx" />
     <Content Include="Web.config" />
@@ -111,6 +114,8 @@
     <Compile Include="Model\BLL\Status.cs" />
     <Compile Include="Model\BLL\Tax.cs" />
     <Compile Include="Model\BLL\User.cs" />
+    <Compile Include="Model\BLL\ViewOrderDetails.cs" />
+    <Compile Include="Model\Code\Item.cs" />
     <Compile Include="Model\DAL\CategoryDAL.cs" />
     <Compile Include="Model\DAL\DALBase.cs" />
     <Compile Include="Model\DAL\GradeDAL.cs" />
@@ -123,7 +128,10 @@
     <Compile Include="Model\DAL\StatusDAL.cs" />
     <Compile Include="Model\DAL\TaxDAL.cs" />
     <Compile Include="Model\DAL\UserDAL.cs" />
+    <Compile Include="Model\DAL\ViewOrderDetailsDAL.cs" />
     <Compile Include="Model\Images.cs" />
+    <Compile Include="Model\Logic\CartItem.cs" />
+    <Compile Include="Model\Logic\ShoppingCart.cs" />
     <Compile Include="Pages\Shared\Error.aspx.cs">
       <DependentUpon>Error.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -165,6 +173,13 @@
     </Compile>
     <Compile Include="Pages\WebAdminPages\AdminLogin.aspx.designer.cs">
       <DependentUpon>AdminLogin.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\WebAdminPages\AdminOrderdetails.aspx.cs">
+      <DependentUpon>AdminOrderdetails.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\WebAdminPages\AdminOrderdetails.aspx.designer.cs">
+      <DependentUpon>AdminOrderdetails.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\WebAdminPages\AdminOrders.aspx.cs">
       <DependentUpon>AdminOrders.aspx</DependentUpon>
@@ -264,12 +279,19 @@
     <Compile Include="Pages\WebShopPages\Login.aspx.designer.cs">
       <DependentUpon>Login.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Pages\WebShopPages\Order.aspx.cs">
-      <DependentUpon>Order.aspx</DependentUpon>
+    <Compile Include="Pages\WebShopPages\OrderCart.aspx.cs">
+      <DependentUpon>OrderCart.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Pages\WebShopPages\Order.aspx.designer.cs">
-      <DependentUpon>Order.aspx</DependentUpon>
+    <Compile Include="Pages\WebShopPages\OrderCart.aspx.designer.cs">
+      <DependentUpon>OrderCart.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\WebShopPages\ProceedOrder.aspx.cs">
+      <DependentUpon>ProceedOrder.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\WebShopPages\ProceedOrder.aspx.designer.cs">
+      <DependentUpon>ProceedOrder.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\WebShopPages\Productdetails.aspx.cs">
       <DependentUpon>Productdetails.aspx</DependentUpon>

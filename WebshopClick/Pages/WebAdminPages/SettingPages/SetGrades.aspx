@@ -33,7 +33,7 @@
                         <td class="command">
                             <asp:LinkButton runat="server" CommandName="Delete" Text="Ta bort" CausesValidation="false" 
                               OnClientClick="return confirm('Ta bort betyget permanent?');" />
-                            <asp:LinkButton runat="server" CommandName="Edit" Text="Redigera" CausesValidation="false" />
+                            <asp:LinkButton  runat="server" CommandName="Edit" Text="Redigera" CausesValidation="false" />
                         </td>
                     </tr>
                 </ItemTemplate>

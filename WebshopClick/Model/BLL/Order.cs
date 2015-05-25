@@ -12,6 +12,10 @@ namespace WebshopClick.Model.BLL
 
         public int UserID { get; set; }
 
+        [Required(ErrorMessage = "Ett namn måste anges.")]
+        [StringLength(50, ErrorMessage = "Namnet kan bestå av som mest 50 tecken.")]
+        public string Name { get; set; }
+
         [Required(ErrorMessage = "Ett datum måste anges.")]
         public DateTime Date { get; set; }
 
@@ -26,10 +30,6 @@ namespace WebshopClick.Model.BLL
         [Required(ErrorMessage = "En ort måste anges.")]
         [StringLength(20, ErrorMessage = "Orten kan bestå av som mest 20 tecken.")]
         public string City{ get; set; }
-
-        [Required(ErrorMessage = "Ett kategori måste anges")]
-        [Range(0, Int32.MaxValue, ErrorMessage = "Ett heltal måste anges.")]
-        public int CategoryID { get; set; }
 
         [Required(ErrorMessage = "Ett betalningssätt måste anges")]
         [Range(0, Int32.MaxValue, ErrorMessage = "Ett betalningssätt måste anges.")]

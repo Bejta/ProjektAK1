@@ -23,6 +23,10 @@ article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
 	display: block;
 }
+.tablethumbs{
+    width:45px;
+    height:70px;
+}
 #admin_wrapper{
     width:80%;
     margin-left:auto;
@@ -88,7 +92,7 @@ ul{
     font-family:Tahoma;
     font-size:0.8em;
 }
-table
+/*table
 {
     border: 1px solid #333;
     border-collapse: collapse;
@@ -108,7 +112,7 @@ td, th
     padding: 3px 2px;
     text-align: left;
     vertical-align: middle;
-}
+}*/
 
 /*Buttons on settings page*/
 .settingButtons{
@@ -138,3 +142,63 @@ td, th
     background-color:#5E3BB9;
 }
 /*End of buttons on settings page*/
+/*************************TABLE***********************************/
+table {
+  font-family: "Helvetica Neue", Helvetica, sans-serif;
+  color:darkblue;
+  width:100%;
+  
+}
+.tablethumbs{
+    width:45px;
+    height:70px;
+}
+
+caption {
+  text-align: left;
+  color:#808080;
+  font-weight: bold;
+  text-transform: uppercase;
+  padding: 5px;
+}
+
+thead {
+  text-align:right;
+  background: #3f4c6b;
+  color: white;
+}
+
+th,
+td {
+  padding: 5px 10px;
+}
+
+tbody tr:nth-child(even) {
+  background:#edf6d1;
+}
+
+tbody tr td:nth-child(2) {
+  text-align:right;
+}
+
+tbody tr td:nth-child(3),
+tbody tr td:nth-child(4),
+tbody tr td:nth-child(5),
+tbody tr td:nth-child(7),
+tbody tr td:nth-child(6),
+tbody tr td:nth-child(8) {
+  text-align: right;
+  font-family: monospace;
+  font-size:1.2em;
+}
+
+tfoot {
+  background-color:#3f4c6b;
+  color: white;
+  text-align: right;
+}
+
+tfoot tr th:last-child {
+  font-family: monospace;
+}
+/*********************END TABLE*************************/

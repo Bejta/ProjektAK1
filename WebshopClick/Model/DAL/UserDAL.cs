@@ -10,6 +10,69 @@ namespace WebshopClick.Model.DAL
 {
     public class UserDAL:DALBase
     {
+        public void UpdateUser(User user)
+        {
+            using (SqlConnection conn = CreateConnection())
+            {
+                try
+                {
+                    SqlCommand cmd = new SqlCommand("appSchema.uspUpdateUser", conn);
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    conn.Open();
+                    cmd.Parameters.Add("@UserID", SqlDbType.Int, 4).Value = user.UserID;
+                    cmd.Parameters.Add("@LoginID", SqlDbType.NVarChar, 20).Value = user.LoginID;
+                    cmd.Parameters.Add("@Password", SqlDbType.NVarChar, 100).Value = user.Password;
+                    cmd.Parameters.Add("@Name", SqlDbType.NVarChar, 50).Value = user.Name;
+                    cmd.Parameters.Add("@Address", SqlDbType.NVarChar, 30).Value = user.Address;
+                    cmd.Parameters.Add("@Postnumber", SqlDbType.NVarChar, 6).Value = user.Postnumber;
+                    cmd.Parameters.Add("@City", SqlDbType.NVarChar, 20).Value = user.City;
+                    cmd.Parameters.Add("@Email", SqlDbType.NVarChar, 40).Value = user.Email;
+                    cmd.Parameters.Add("@Telephone", SqlDbType.NVarChar, 15).Value = user.Telephone;
+                    cmd.Parameters.Add("@Mobile", SqlDbType.NVarChar, 15).Value = user.Mobile;
+                    cmd.Parameters.Add("@Administrator", SqlDbType.Bit, 2).Value = false;
+                    cmd.ExecuteNonQuery();
+
+                }
+                catch
+                {
+                    throw new ApplicationException("An error occured in the data access layer.");
+                }
+            }
+        }
+        public void InsertUser(User user)
+        {
+            using (SqlConnection conn = CreateConnection())
+            {
+                try
+                {
+                    SqlCommand cmd = new SqlCommand("appSchema.uspInsertUser", conn);
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    cmd.Parameters.Add("@LoginID", SqlDbType.NVarChar, 20).Value = user.LoginID;
+                    cmd.Parameters.Add("@Password", SqlDbType.NVarChar, 100).Value = user.Password;
+                    cmd.Parameters.Add("@Name", SqlDbType.NVarChar, 50).Value = user.Name;
+                    cmd.Parameters.Add("@Address", SqlDbType.NVarChar, 30).Value = user.Address;
+                    cmd.Parameters.Add("@Postnumber", SqlDbType.NVarChar, 6).Value = user.Postnumber;
+                    cmd.Parameters.Add("@City", SqlDbType.NVarChar, 20).Value = user.City;
+                    cmd.Parameters.Add("@Email", SqlDbType.NVarChar, 40).Value = user.Email;
+                    cmd.Parameters.Add("@Telephone", SqlDbType.NVarChar, 15).Value = user.Telephone;
+                    cmd.Parameters.Add("@Mobile", SqlDbType.NVarChar, 15).Value = user.Mobile;
+                    cmd.Parameters.Add("@Administrator", SqlDbType.Bit, 2).Value = false;
+                    
+                    cmd.Parameters.Add("@UserID", SqlDbType.Int, 4).Direction = ParameterDirection.Output;
+
+                    conn.Open();
+                    cmd.ExecuteNonQuery();
+
+                    user.UserID = (int)cmd.Parameters["@UserID"].Value;
+                }
+                catch
+                {
+                    throw new ApplicationException("An error occured in the data access layer.");
+                }
+            }
+        }
         /// <summary>
         /// Method that returns all users
         /// </summary>
