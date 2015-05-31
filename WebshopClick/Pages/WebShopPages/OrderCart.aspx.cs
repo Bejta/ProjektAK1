@@ -5,7 +5,6 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using WebshopClick.Model.Code;
-using WebshopClick.Model.Logic;
 
 namespace WebshopClick.Pages.WebShopPages
 {
@@ -16,37 +15,33 @@ namespace WebshopClick.Pages.WebShopPages
             if (!Page.IsPostBack)
             {
 
-            
-            if (Session["Success"] as bool? == true)
-            {
-                FlashPlaceHolder.Visible = true;
-            }
-            if (Session["Fail"] as bool? == true)
-            {
-                PlaceHolder1.Visible = true;
-            }
-            if (Session["Fail"] as bool? == true)
-            {
-                PlaceHolder2.Visible = true;
-            }
-            UpdateCart();
-            List<Item> cart = (List<Item>)Session["cart"];
-            this.listView.DataSource = cart;
-            this.listView.DataBind();
 
-            //if (!IsPostBack)
-            //{
-            //    //List<Item> cart = (List<Item>)Session["cart"];
-                
+                if (Session["Success"] as bool? == true)
+                {
+                    FlashPlaceHolder.Visible = true;
+                }
+                if (Session["Fail"] as bool? == true)
+                {
+                    PlaceHolder1.Visible = true;
+                }
+                if (Session["Fail"] as bool? == true)
+                {
+                    PlaceHolder2.Visible = true;
+                }
 
-            //    if ((Session["cart"] != null) && (cart.Count() != 0))
-            //    {        
-            //            Label TotalCart = (Label)listView.FindControl("TotalCart");
-            //            TotalCart.Text = (GetSubTotal(cart)).ToString();
-            //    }
-            //}
-            //this.listView.DataSource = cart;
-            //this.listView.DataBind();
+                UpdateCart();
+                isLoged();
+                List<Item> cart = (List<Item>)Session["cart"];
+
+                this.listView.DataSource = cart;
+                this.listView.DataBind();
+
+                Label TotalCart = (Label)listView.FindControl("TotalCart");
+                if (TotalCart != null)
+                {
+                    TotalCart.Text = (GetSubTotal(cart)).ToString();
+                }
+
             }
         }
         protected void Close_Click(object sender, EventArgs e)
@@ -64,6 +59,13 @@ namespace WebshopClick.Pages.WebShopPages
             Session["Info"] = false;
             PlaceHolder2.Visible = false;
         }
+
+        /// <summary>
+        /// Check if item already exists in a cart.
+        /// Used to increase quantity if Item exsists.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         private int isExisting(int id)
         {
             List<Item> cart = (List<Item>)Session["cart"];
@@ -77,6 +79,11 @@ namespace WebshopClick.Pages.WebShopPages
             return -1;
         }
 
+        /// <summary>
+        /// Remove item from the cart
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void LinkButtonDelete_Click(object sender, EventArgs e)
         {
             Button lb = (Button)sender;
@@ -88,28 +95,21 @@ namespace WebshopClick.Pages.WebShopPages
             this.listView.DataSource = cart;
             this.listView.DataBind();
 
-            if (cart.Count != 0) {
+            if (cart.Count != 0)
+            {
                 Label TotalCart = (Label)listView.FindControl("TotalCart");
                 TotalCart.Text = (GetSubTotal(cart)).ToString();
             }
+            GetSubTotal(cart);
             UpdateCart();
-            //if ((cart.Count() != 0) && (Session["cart"] != null))
-            //{
-            //    int cartTotalQuantity = 0;
-            //    foreach (Item item in cart)
-            //    {
-            //        cartTotalQuantity = cartTotalQuantity + item.Quantity;
-            //    }
-            //    lblCart.Text = (cartTotalQuantity).ToString();
-            //}
-            //else
-            //{
-            //    lblCart.Text = ("0").ToString();
-            //}
         }
+
+        /// <summary>
+        /// Calculates number of items in shopping cart
+        /// </summary>
         protected void UpdateCart()
         {
-            int cartTotalQuantity = 0;
+            decimal cartTotalQuantity = 0;
             List<Item> cart = (List<Item>)Session["cart"];
             if ((Session["cart"] != null))
             {
@@ -129,16 +129,34 @@ namespace WebshopClick.Pages.WebShopPages
             PlaceHolder2.Visible = true;
             return;
         }
+        /// <summary>
+        /// Method that calculates total value of shopping cart
+        /// </summary>
+        /// <param name="cart"></Item></param>
+        /// <returns></returns>
+        private decimal GetSubTotal(List<Item> cart)
+        {
+            decimal subTotal = 0;
+            if (cart != null)
+            {
+                foreach (Item item in cart)
+                    subTotal += item.Product.Price * item.Quantity;
+
+                return subTotal;
+            }
+
+            return 0;
+        }
         protected void LinkButtonEdit_Click(object sender, EventArgs e)
         {
             Button lb = (Button)sender;
-            TextBox tx= (TextBox)lb.FindControl("QuantityEdit"); 
+            TextBox tx = (TextBox)lb.FindControl("QuantityEdit");
             HiddenField hf = (HiddenField)lb.FindControl("HiddenFieldButton");
             int id = Convert.ToInt32(hf.Value);
             List<Item> cart = (List<Item>)Session["cart"];
             try
             {
-                if (Convert.ToInt32(tx.Text) > 0 && Convert.ToInt32(tx.Text)<999999)
+                if (Convert.ToInt32(tx.Text) > 0 && Convert.ToInt32(tx.Text) < 999999)
                 {
                     cart[isExisting(id)].Quantity = Convert.ToInt32(tx.Text);
                 }
@@ -159,24 +177,48 @@ namespace WebshopClick.Pages.WebShopPages
             Label TotalCart = (Label)listView.FindControl("TotalCart");
             TotalCart.Text = (GetSubTotal(cart)).ToString();
             UpdateCart();
+
             FlashPlaceHolder.Visible = true;
         }
-        /// <summary>
-        /// Method that calculates total value of shopping cart
-        /// </summary>
-        /// <param name="cart"></Item></param>
-        /// <returns></returns>
-        private decimal GetSubTotal(List<Item> cart)
-        {
-            decimal subTotal = 0;
-            foreach (Item item in cart)
-                subTotal += item.Product.Price * item.Quantity;
 
-            return subTotal;
+
+        protected void isLoged()
+        {
+            WebshopClick.Model.BLL.User user = (WebshopClick.Model.BLL.User)Session["User"];
+            ButtonAdmin.Visible = false;
+
+            if (user == null)
+            {
+
+                btnLogin.Text = "Logga in";
+
+                return;
+            }
+            else
+            {
+                if (user.Administrator == true)
+                {
+                    ButtonAdmin.Visible = true;
+                }
+                btnLogin.Text = "Hej " + user.LoginID;
+
+                if (user.Administrator == true)
+                {
+                    ButtonAdmin.Visible = true;
+                }
+            }
+        }
+        protected void ButtonAdmin_Click(object sender, EventArgs e)
+        {
+            Response.RedirectToRoute("alogin");
         }
         protected void btnLogin_Click(object sender, EventArgs e)
         {
             Response.RedirectToRoute("Profile");
+        }
+        protected void btnPage_Click(object sender, EventArgs e)
+        {
+            Response.RedirectToRoute("MyPages");
         }
         protected void ImgSearch_Click(object sender, EventArgs e)
         {
@@ -194,7 +236,6 @@ namespace WebshopClick.Pages.WebShopPages
         protected void Button2_Click(object sender, EventArgs e)
         {
             List<Item> cart = (List<Item>)Session["cart"];
-            //Session["cart"] = null;
             Session["cart"] = cart;
             cart.Clear();
             this.listView.DataSource = cart;

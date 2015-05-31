@@ -7,7 +7,6 @@ using System.Web.Security;
 using System.Web.SessionState;
 using WebshopClick.App_Start;
 using WebshopClick.Model.BLL;
-using WebshopClick.Model.Logic;
 
 namespace WebshopClick
 {
@@ -21,7 +20,7 @@ namespace WebshopClick
 
         protected void Session_Start(object sender, EventArgs e)
         {
-            //Session["cart"]= new ShoppingCart();
+           
         }
 
         protected void Application_BeginRequest(object sender, EventArgs e)

@@ -31,7 +31,6 @@ namespace WebshopClick.Pages.WebAdminPages
                     int fil = Int32.Parse(StatusDropDownList.SelectedValue);
                     return Service.GetOrderPageWiseByStatus(fil, maximumRows, startRowIndex, out totalRowCount);
                 }
-
                 return Service.GetOrderPageWise(maximumRows, startRowIndex, out totalRowCount);
             }
             catch (Exception)
@@ -40,7 +39,6 @@ namespace WebshopClick.Pages.WebAdminPages
                 totalRowCount = 0;
                 return null;
             }
-            //return Service.GetOrderPageWise(maximumRows, startRowIndex, out totalRowCount);
         }
         public IEnumerable<Status> StatusDropDownList_GetData()
         {
@@ -68,16 +66,14 @@ namespace WebshopClick.Pages.WebAdminPages
         }
         protected void SelectionHasChanged(Object sender, System.EventArgs e)
         {
-            //productList.SelectMethod = "ProductListView_GetData";
             OrderListView.DataBind();
         }
-       
+
         public void OrderListView_DeleteItem(int OrderID)
         {
             try
             {
                 Service.DeleteOrder(OrderID);
-                //Session["Success"] = true;
                 Response.RedirectToRoute("Alogin");
             }
             catch (Exception)
@@ -85,7 +81,7 @@ namespace WebshopClick.Pages.WebAdminPages
                 ModelState.AddModelError(String.Empty, "Ett oväntat fel inträffade då beställningsuppgiften skulle tas bort.");
             }
         }
-        
+
         public void OrderListView_UpdateItem(int OrderID) // Parameterns namn måste överrensstämma med värdet DataKeyNames har.
         {
             try
@@ -93,16 +89,13 @@ namespace WebshopClick.Pages.WebAdminPages
                 var order = Service.GetOrderByID(OrderID);
                 if (order == null)
                 {
-
-                    ModelState.AddModelError(String.Empty,String.Format("Beställning hittades inte.", OrderID));
+                    ModelState.AddModelError(String.Empty, String.Format("Beställning hittades inte.", OrderID));
                     return;
                 }
 
                 if (TryUpdateModel(order))
                 {
                     Service.UpdateOrder(order);
-                    //Session["Success"] = true;
-                    //Response.RedirectToRoute("Alogin");// PRG - POST->Redirect->GET
                 }
             }
             catch (Exception)
@@ -110,7 +103,6 @@ namespace WebshopClick.Pages.WebAdminPages
                 ModelState.AddModelError(String.Empty, "Ett oväntat fel inträffade då beställningsuppgifter skulle uppdateras.");
             }
         }
-
 
         protected void BtnOrderDetails_Click(object sender, EventArgs e)
         {

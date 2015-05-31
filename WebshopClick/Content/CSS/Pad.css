@@ -38,7 +38,7 @@ footer, header, hgroup, menu, nav, section {
     color: #666666;
 }
 #admin_wrapper{
-    width:80%;
+    width:95%;
     margin-left:auto;
     margin-right:auto;
 }
@@ -99,6 +99,7 @@ background-image: url('error.png');
 
 
 /*********************Validation*************/
+
 .validation
 {
     font-weight: bold;
@@ -225,7 +226,6 @@ background-image: url('error.png');
   width: 16px;
   margin-left: 5px;
   
-  /*color: #000;*/
 }
 * {
   margin: 0px;
@@ -272,13 +272,13 @@ input
     background-color:lightyellow;
     font-size:1.2em;
     float:right;
-    margin-right:47%;
+    margin-right:5%;
     width: 30%;
 }
 .wrapperForm{
     margin-left:auto;
     margin-right:auto;
-    width:49%;
+    width:95%;
 }
 .commandButtons{
     margin-top:2%;
@@ -302,7 +302,7 @@ input.postal-code
     background-color:lightyellow;
     font-size:1.2em;
     float:right;
-    margin-right:47%;
+    margin-right:5%;
     width: 6em;
 }
 /* Styles for forms
@@ -404,12 +404,11 @@ body {
     width:66%;
     margin-right:auto;
     margin-left:auto;
-    /*margin-top:1%;*/
     height:100px;
     text-align:left;
 }
 .wrapper{
-    width:66%;
+    width:100%;
     margin-left:auto;
     margin-right:auto;
 }
@@ -425,7 +424,7 @@ body {
     border-style:solid;
     border-width:1px;
     padding-top:8px;
-    padding-bottom:8px;
+    padding-bottom:40px;
     background-color:#8C9BAB;
 }
 .navbuttonsMain{
@@ -470,7 +469,7 @@ body {
     letter-spacing: 0px;
 }
 #ContentPlaceHolder1_TxtSearch{
-    margin-left:17%;
+    margin-left:1%;
     background: white;
     padding:5px;
     border-color:#405973;
@@ -744,5 +743,6 @@ border:1px solid #91b41a; -webkit-border-radius: 3px; -moz-border-radius: 3px;bo
  background-image: linear-gradient(to bottom, #95b91a, #8bb41d);filter:progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#95b91a, endColorstr=#8bb41d);
 }
 /**********************End button commands**************************/
+
 
 

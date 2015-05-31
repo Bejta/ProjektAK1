@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using WebshopClick.Model.BLL;
 
 namespace WebshopClick.Pages.Shared
 {
@@ -11,12 +12,16 @@ namespace WebshopClick.Pages.Shared
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            User user = (User)Session["User"];
+            if (user == null || user.Administrator == false || user.LoginID == "okänd")
+            {
+                Response.RedirectToRoute("Profile");
+            }
         }
 
         protected void Alogin_Click(object sender, EventArgs e)
         {
-            Response.RedirectToRoute("Alogin");
+            Response.RedirectToRoute("Index");
         }
 
         protected void AdminOrders_Click(object sender, EventArgs e)

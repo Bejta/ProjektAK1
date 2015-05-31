@@ -1,55 +1,54 @@
-﻿<%@ Master Language="C#"  AutoEventWireup="true" CodeBehind="WebShop.master.cs" Inherits="WebshopClick.Pages.Shared.WebShop" %>
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="WebShop.master.cs" Inherits="WebshopClick.Pages.Shared.WebShop" %>
 
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title>WebShop Click</title>
-    <link href="~/Content/CSS/Shop.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/CSS/Shop.css" rel="stylesheet" type="text/css" media="only screen and (min-width:768px)" />
+    <link href="~/Content/CSS/Pad.css" rel="stylesheet" type="text/css" media="only screen and (min-width:481px)  and (max-width:768px)" />
+    <link href="~/Content/CSS/Mobile.css" rel="stylesheet" type="text/css" media="only screen and (max-width:480px)" />
     <link href='http://fonts.googleapis.com/css?family=Jura:400,300,500,600' rel='stylesheet' type='text/css' />
     <link href='http://fonts.googleapis.com/css?family=Megrim' rel='stylesheet' type='text/css' />
     <link href='http://fonts.googleapis.com/css?family=Shadows+Into+Light' rel='stylesheet' type='text/css' />
-    
-   
-    
+
+
+
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>
 <body>
     <form id="form1" runat="server">
-     <div id="shop_wrapper">
-        
-        <div id="shop_header">
-            <div id="example">
-                <ul class="titel">
-                    <li>W</li>
-                    <li>E</li>
-                    <li>B</li>
-                    <li>S</li>
-                    <li>H</li>
-                    <li>O</li>
-                    <li>P</li>
-                    <li>C</li>
-                    <li>L</li>
-                    <li>I</li>
-                    <li>C</li>
-                    <li>K</li>   
-				</ul>               
-            </div>   
+        <div id="shop_wrapper">
 
-                <%-- <h1>Webshop Click</h1>  --%>
+            <div id="shop_header">
+                <div id="example">
+                    <ul class="titel">
+                        <li>W</li>
+                        <li>E</li>
+                        <li>B</li>
+                        <li>S</li>
+                        <li>H</li>
+                        <li>O</li>
+                        <li>P</li>
+                        <li>C</li>
+                        <li>L</li>
+                        <li>I</li>
+                        <li>C</li>
+                        <li>K</li>
+                    </ul>
+                </div>
+            </div>
+
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+            </asp:ContentPlaceHolder>
+            <div id="footer">
+
+                <p id="Signature">Linnéuniversitetet | Webbprogrammerare 2014, Individuellt Mjukvaruutvecklingsprojekt</p>
+                <p id="Copyright">&copy; 2015 Jasmin Bejtovic</p>
+            </div>
         </div>
-          
-        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
-            
-        </asp:ContentPlaceHolder>
-          <div id="footer">
-           
-           <p id="Signature">Linnéuniversitetet | Webbprogrammerare 2014, Individuellt Mjukvaruutvecklingsprojekt</p>
-              <p id="Copyright"> &copy; 2015 Jasmin Bejtovic</p>
-        </div> 
-     </div>
-        
+
     </form>
 </body>
 </html>

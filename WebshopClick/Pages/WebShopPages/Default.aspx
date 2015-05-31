@@ -7,13 +7,13 @@
         <asp:TextBox ID="TxtSearch" CssClass="cell" runat="server"></asp:TextBox>
         <asp:Button ID="ImgSearch" CssClass="cell" OnClick="ImgSearch_Click" runat="server" Text="Sök" />
         <div class="navbuttonsMain">
-
+            <asp:LinkButton Visible="false" ID="ButtonAdmin" CssClass="navbuttons" runat="server" OnClick="ButtonAdmin_Click">Admin</asp:LinkButton>
             <asp:LinkButton ID="btnCart" CssClass="navbuttons" runat="server" OnClick="btnCart_Click" Text="">
                 <asp:Image ID="Image1" runat="server" CssClass="imgCart" ImageUrl="~/Content/ButtonImages/shopping_cart_ecommerce.png" />
                 <asp:Label ID="lblCart" runat="server" Text=""></asp:Label>
             </asp:LinkButton>
             <asp:LinkButton ID="btnLogin" CssClass="navbuttons" runat="server" OnClick="btnLogin_Click">Logga in</asp:LinkButton>
-            <asp:LinkButton ID="btnProfile" CssClass="navbuttons" runat="server">Mina sidor</asp:LinkButton>
+            <asp:LinkButton ID="btnProfile" CssClass="navbuttons" runat="server" OnClick="btnPage_Click">Mina sidor</asp:LinkButton>
             <asp:LinkButton ID="btnHem" CssClass="navbuttons" runat="server" OnClick="btnHem_Click">Hem</asp:LinkButton>
 
         </div>
@@ -31,14 +31,12 @@
         </asp:DropDownList>
     </div>
     <div id="products">
-        <%-- <ul class="productlist>--%>
+        
         <asp:ListView ID="productList" runat="server"
             ItemType="WebshopClick.Model.BLL.Product"
             SelectMethod="ProductListView_GetData"
             DataKeyNames="ProductID">
 
-
-            <%-- Layout of productlist --%>
             <LayoutTemplate>
                 <ul class="productlist">
                     <asp:PlaceHolder ID="itemPlaceHolder" runat="server"></asp:PlaceHolder>
@@ -84,6 +82,5 @@
                 </div>
             </EmptyDataTemplate>
         </asp:ListView>
-        <%-- </ul>--%>
     </div>
 </asp:Content>

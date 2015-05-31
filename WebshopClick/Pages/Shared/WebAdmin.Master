@@ -7,38 +7,44 @@
     <title>WebShop Admin</title>
     <link href="~/Content/CSS/Shop.css" rel="stylesheet" type="text/css" />
     <link href='http://fonts.googleapis.com/css?family=Jura:400,300,500,600' rel='stylesheet' type='text/css' />
+    <link href="~/Content/CSS/Pad.css" rel="stylesheet" type="text/css" media="only screen and (min-width:481px)  and (max-width:768px)" />
+    <link href="~/Content/CSS/Mobile.css" rel="stylesheet" type="text/css" media="only screen and (max-width:480px)" />
     <link href='http://fonts.googleapis.com/css?family=Megrim' rel='stylesheet' type='text/css' />
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>
 <body>
     <form id="form1" runat="server">
-<%--Header--%>
-    <div id="admin_wrapper">
-        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
-        </asp:ContentPlaceHolder>
-        
-        <div id="admin_header">
-            <h1>Administration</h1>
+        <%--Header--%>
+        <div id="admin_wrapper">
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+            </asp:ContentPlaceHolder>
+
+            <div id="admin_header">
+                <h1>Administration</h1>
+            </div>
+            <div id="admin_menu">
+                <ul>
+                    <li>
+                        <asp:LinkButton CssClass="command" ID="ALogin" runat="server" OnClick="Alogin_Click">Till Webshop</asp:LinkButton></li>
+                    <li>
+                        <asp:LinkButton CssClass="command" ID="AdminOrders" runat="server" OnClick="AdminOrders_Click">Beställningar</asp:LinkButton></li>
+                    <li>
+                        <asp:LinkButton CssClass="command" ID="AdminProducts" runat="server" OnClick="AdminProducts_Click">Produkter</asp:LinkButton></li>
+                    <li>
+                        <asp:LinkButton CssClass="command" ID="Settings" runat="server" OnClick="Settings_Click">Egenskaper</asp:LinkButton></li>
+                    <li>
+                        <asp:LinkButton CssClass="command" ID="Statistics" runat="server" OnClick="Statistics_Click">Statistik</asp:LinkButton></li>
+                </ul>
+            </div>
+            <asp:ContentPlaceHolder ID="admin_content" runat="server">
+            </asp:ContentPlaceHolder>
+
         </div>
-        <div id="admin_menu">
-            <ul>
-                <li><asp:LinkButton CssClass="command" ID="ALogin" runat="server" OnClick="Alogin_Click">Logga in</asp:LinkButton></li>
-                <li><asp:LinkButton CssClass="command" ID="AdminOrders" runat="server" OnClick="AdminOrders_Click">Beställningar</asp:LinkButton></li>
-                <li><asp:LinkButton CssClass="command" ID="AdminProducts" runat="server" OnClick="AdminProducts_Click">Produkter</asp:LinkButton></li>
-                <li><asp:LinkButton CssClass="command" ID="Settings" runat="server" OnClick="Settings_Click">Egenskaper</asp:LinkButton></li>
-                <li><asp:LinkButton CssClass="command" ID="Statistics" runat="server" OnClick="Statistics_Click">Statistik</asp:LinkButton></li>
-            </ul>          
-        </div>
-        <asp:ContentPlaceHolder ID="admin_content" runat="server">
-        </asp:ContentPlaceHolder>
-            
-    </div>
         <div id="footer">
-            <p id="Copyright"> &copy; 2015 Jasmin Bejtovic</p>
+            <p id="Copyright">&copy; 2015 Jasmin Bejtovic</p>
             <p id="Signature">Linnéuniversitetet | Webbprogrammerare 2014, WebshopClick</p>
         </div>
-        
     </form>
 </body>
 </html>

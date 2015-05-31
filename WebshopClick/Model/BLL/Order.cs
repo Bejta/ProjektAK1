@@ -29,7 +29,7 @@ namespace WebshopClick.Model.BLL
 
         [Required(ErrorMessage = "En ort måste anges.")]
         [StringLength(20, ErrorMessage = "Orten kan bestå av som mest 20 tecken.")]
-        public string City{ get; set; }
+        public string City { get; set; }
 
         [Required(ErrorMessage = "Ett betalningssätt måste anges")]
         [Range(0, Int32.MaxValue, ErrorMessage = "Ett betalningssätt måste anges.")]

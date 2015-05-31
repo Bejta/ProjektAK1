@@ -22,11 +22,47 @@ namespace WebshopClick.Pages.WebShopPages
         {
 
         }
+        protected void ButtonAdmin_Click(object sender, EventArgs e)
+        {
+            Response.RedirectToRoute("alogin");
+        }
+        protected void btnPage_Click(object sender, EventArgs e)
+        {
+            Response.RedirectToRoute("MyPages");
+        }
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Session["cart"] != null)
             {
                 UpdateCart();
+
+            }
+            isLoged();
+        }
+        protected void isLoged()
+        {
+            WebshopClick.Model.BLL.User user = (WebshopClick.Model.BLL.User)Session["User"];
+            ButtonAdmin.Visible = false;
+
+            if (user == null)
+            {
+
+                btnLogin.Text = "Logga in";
+
+                return;
+            }
+            else
+            {
+                if (user.Administrator == true)
+                {
+                    ButtonAdmin.Visible = true;
+                }
+                btnLogin.Text = "Hej " + user.LoginID;
+
+                if (user.Administrator == true)
+                {
+                    ButtonAdmin.Visible = true;
+                }
             }
         }
         public Product ProductListView_GetData([RouteData] int ProductID)
@@ -82,9 +118,12 @@ namespace WebshopClick.Pages.WebShopPages
         {
             Response.RedirectToRoute("ViewCart");
         }
+        protected void btnLogin_Click(object sender, EventArgs e)
+        {
+            Response.RedirectToRoute("Profile");
+        }
         protected void BuyButton_OnClick(object sender, EventArgs e)
         {
-
             Button myButton = (Button)sender;
             Service service = new Service();
             int productID = Convert.ToInt32(RouteData.Values["ProductID"]);
@@ -92,9 +131,7 @@ namespace WebshopClick.Pages.WebShopPages
             {
                 List<Item> cart = new List<Item>();
                 cart.Add(new Item(this.Service.GetProductByID(productID), 1));
-
                 Session["Cart"] = cart;
-
             }
             else
             {
@@ -112,17 +149,5 @@ namespace WebshopClick.Pages.WebShopPages
             }
             Response.RedirectToRoute("ViewCart");
         }
-        //public IEnumerable<Category> CategoryDropDownList_GetData()
-        //{
-        //    try
-        //    {
-        //        return Service.GetCategory();
-        //    }
-        //    catch (Exception)
-        //    {
-        //        ModelState.AddModelError(String.Empty, "Ett oväntat fel inträffade då kategoriuppgifter skulle hämtas.");
-        //        return null;
-        //    }
-        //}
     }
 }

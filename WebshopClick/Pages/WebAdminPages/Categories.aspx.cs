@@ -10,7 +10,7 @@ namespace WebshopClick.Pages.WebAdminPages
 {
     public partial class Categories : System.Web.UI.Page
     {
-       private Service _service;
+        private Service _service;
 
         private Service Service
         {
@@ -37,8 +37,6 @@ namespace WebshopClick.Pages.WebAdminPages
             try
             {
                 Service.DeleteCategory(CategoryID);
-                //Session["Success"] = true;
-                //Response.RedirectToRoute("Default");
             }
             catch (Exception)
             {
@@ -52,8 +50,6 @@ namespace WebshopClick.Pages.WebAdminPages
                 try
                 {
                     Service.UpdateCategory(category);
-                    //Session["Success"] = true;
-                    //Response.RedirectToRoute("Default");
                 }
                 catch (Exception)
                 {
@@ -68,7 +64,7 @@ namespace WebshopClick.Pages.WebAdminPages
                 var category = Service.GetCategoryByID(CategoryID);
                 if (category == null)
                 {
-                    
+
                     ModelState.AddModelError(String.Empty,
                         String.Format("Kategori hittades inte.", CategoryID));
                     return;
@@ -77,7 +73,6 @@ namespace WebshopClick.Pages.WebAdminPages
                 if (TryUpdateModel(category))
                 {
                     Service.UpdateCategory(category);
-                    //Session["Success"] = true;
                     Response.RedirectToRoute("Settings");// PRG - POST->Redirect->GET
                 }
             }
@@ -87,5 +82,5 @@ namespace WebshopClick.Pages.WebAdminPages
             }
         }
     }
-    
+
 }

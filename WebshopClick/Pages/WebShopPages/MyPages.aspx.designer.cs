@@ -10,7 +10,7 @@
 namespace WebshopClick.Pages.WebShopPages {
     
     
-    public partial class ProceedOrder {
+    public partial class MyPages {
         
         /// <summary>
         /// TxtSearch control.
@@ -103,66 +103,21 @@ namespace WebshopClick.Pages.WebShopPages {
         protected global::System.Web.UI.WebControls.ValidationSummary ValidationSummaryCategory;
         
         /// <summary>
-        /// FlashPlaceHolder control.
+        /// OrderListView control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.PlaceHolder FlashPlaceHolder;
+        protected global::System.Web.UI.WebControls.ListView OrderListView;
         
         /// <summary>
-        /// Message control.
+        /// OrderrowListView control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Message;
-        
-        /// <summary>
-        /// Close control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Close;
-        
-        /// <summary>
-        /// PlaceHolder1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.PlaceHolder PlaceHolder1;
-        
-        /// <summary>
-        /// MessageFail control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label MessageFail;
-        
-        /// <summary>
-        /// Button3 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button3;
-        
-        /// <summary>
-        /// OrderFormView control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.FormView OrderFormView;
+        protected global::System.Web.UI.WebControls.ListView OrderrowListView;
     }
 }

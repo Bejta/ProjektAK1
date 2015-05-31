@@ -20,7 +20,6 @@ namespace WebshopClick.App_Start
             routes.MapPageRoute("AOrders", "AOrders", "~/Pages/WebAdminPages/AdminOrders.aspx");
             routes.MapPageRoute("Statistics", "Statistics", "~/Pages/WebAdminPages/Statistics.aspx");
             routes.MapPageRoute("AProducts", "AProducts", "~/Pages/WebAdminPages/AdminProducts.aspx");
-            //routes.MapPageRoute("AOrders", "AOrders", "~/Pages/WebAdminPages/AdminOrders.aspx");
             routes.MapPageRoute("AddProduct", "AddProduct", "~/Pages/WebAdminPages/AddProduct.aspx");
             routes.MapPageRoute("EditProduct", "EditProduct/{ProductID}", "~/Pages/WebAdminPages/EditProduct.aspx");
             routes.MapPageRoute("AdminOrderdetails", "AdminOrderdetails/{OrderID}", "~/Pages/WebAdminPages/AdminOrderdetails.aspx");
@@ -30,6 +29,8 @@ namespace WebshopClick.App_Start
             routes.MapPageRoute("ViewCart", "ViewCart", "~/Pages/WebShopPages/OrderCart.aspx");
             routes.MapPageRoute("Proceed", "Proceed", "~/Pages/WebShopPages/ProceedOrder.aspx");
             routes.MapPageRoute("Profile", "Profile", "~/Pages/WebShopPages/Profile.aspx");
+            routes.MapPageRoute("MyPages", "MyPages", "~/Pages/WebShopPages/MyPages.aspx");
+            routes.MapPageRoute("Error", "Error", "~/Pages/Shared/Error.aspx");
         }
     }
 }

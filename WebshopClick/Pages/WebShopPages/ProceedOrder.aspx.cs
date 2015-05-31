@@ -12,7 +12,6 @@ namespace WebshopClick.Pages.WebShopPages
     public partial class ProceedOrder : System.Web.UI.Page
     {
         private Service _service;
-
         private Service Service
         {
 
@@ -26,6 +25,7 @@ namespace WebshopClick.Pages.WebShopPages
                 HiddenField hiddenUser = OrderFormView.FindControl("HiddenFieldUser") as HiddenField;
                 Label labelDate = OrderFormView.FindControl("LabelDate") as Label;
                 UpdateCart();
+                isLoged();
                 if (hiddenStatus != null)
                 {
                     hiddenStatus.Value = "1";
@@ -85,14 +85,33 @@ namespace WebshopClick.Pages.WebShopPages
         {
             Response.RedirectToRoute("ViewCart");
         }
+        protected void btnPage_Click(object sender, EventArgs e)
+        {
+            Response.RedirectToRoute("MyPages");
+        }
         protected void Button2_Click(object sender, EventArgs e)
         {
-           
-        } 
+            User user = (User)Session["User"];
+
+            if (user != null)
+            {
+                HiddenField hiddenUser = OrderFormView.FindControl("HiddenFieldUser") as HiddenField;
+                TextBox name = OrderFormView.FindControl("Name") as TextBox;
+                TextBox address = OrderFormView.FindControl("Address") as TextBox;
+                TextBox postnumber = OrderFormView.FindControl("Postnumber") as TextBox;
+                TextBox city = OrderFormView.FindControl("TextBox1") as TextBox;
+                hiddenUser.Value = (user.UserID).ToString();
+                name.Text = user.Name;
+                address.Text = user.Address;
+                postnumber.Text = user.Postnumber;
+                city.Text = user.City;
+            }
+
+        }
         protected void btnHem_Click(object sender, EventArgs e)
         {
             Response.RedirectToRoute("index");
-        } 
+        }
         public IEnumerable<Payment> PaymentDropDownList_GetData()
         {
             try
@@ -106,24 +125,24 @@ namespace WebshopClick.Pages.WebShopPages
             }
         }
         void OrderFormView_DataBound(Object sender, EventArgs e)
-        {       
-                HiddenField hiddenStatus = OrderFormView.FindControl("HiddenFieldStatus") as HiddenField;
-                HiddenField hiddenUser = OrderFormView.FindControl("HiddenFieldUser") as HiddenField;
-                Label labelDate = OrderFormView.FindControl("LabelDate") as Label;
+        {
+            HiddenField hiddenStatus = OrderFormView.FindControl("HiddenFieldStatus") as HiddenField;
+            HiddenField hiddenUser = OrderFormView.FindControl("HiddenFieldUser") as HiddenField;
+            Label labelDate = OrderFormView.FindControl("LabelDate") as Label;
 
-                if (hiddenStatus == null)
-                {
-                    hiddenStatus.Value = "1";
-                }
-                if (hiddenUser == null)
-                {
-                    hiddenUser.Value = "1";
-                }
+            if (hiddenStatus == null)
+            {
+                hiddenStatus.Value = "1";
+            }
+            if (hiddenUser == null)
+            {
+                hiddenUser.Value = "1";
+            }
 
-                if (labelDate == null)
-                {
-                    labelDate.Text = DateTime.Now.ToString("dd-MM-yyyy HH:mm:ss");
-                }
+            if (labelDate == null)
+            {
+                labelDate.Text = DateTime.Now.ToString("dd-MM-yyyy HH:mm:ss");
+            }
         }
         protected void OrderFormView_ItemCreated(object sender, EventArgs e)
         {
@@ -147,6 +166,10 @@ namespace WebshopClick.Pages.WebShopPages
                     labelDate.Text = DateTime.Now.ToString("dd-MM-yyyy HH:mm:ss");
                 }
             }
+        }
+        protected void ButtonAdmin_Click(object sender, EventArgs e)
+        {
+            Response.RedirectToRoute("alogin");
         }
 
         public void OrderFormView_InsertItem(WebshopClick.Model.BLL.Order order)
@@ -175,7 +198,6 @@ namespace WebshopClick.Pages.WebShopPages
                             orderrow.RowID = 0;
                         }
                         cart.Clear();
-                        //Session["Success"] = true;
                         FlashPlaceHolder.Visible = true;
                     }
                 }
@@ -186,14 +208,39 @@ namespace WebshopClick.Pages.WebShopPages
                 }
             }
         }
+        protected void isLoged()
+        {
+            WebshopClick.Model.BLL.User user = (WebshopClick.Model.BLL.User)Session["User"];
+            ButtonAdmin.Visible = false;
+
+            if (user == null)
+            {
+
+                btnLogin.Text = "Logga in";
+
+                return;
+            }
+            else
+            {
+                if (user.Administrator == true)
+                {
+                    ButtonAdmin.Visible = true;
+                }
+                btnLogin.Text = "Hej " + user.LoginID;
+
+                if (user.Administrator == true)
+                {
+                    ButtonAdmin.Visible = true;
+                }
+            }
+        }
         protected void btnLogin_Click(object sender, EventArgs e)
         {
             Response.RedirectToRoute("Profile");
         }
-
         protected void ImgSearch_Click(object sender, EventArgs e)
         {
             Response.RedirectToRoute("index");
-        } 
+        }
     }
 }

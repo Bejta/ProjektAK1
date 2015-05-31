@@ -39,6 +39,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Web.DataVisualization" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -57,7 +58,8 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\CSS\Global.css" />
+    <Content Include="Content\CSS\Mobile.css" />
+    <Content Include="Content\CSS\Pad.css" />
     <Content Include="Content\CSS\Shop.css" />
     <Content Include="Content\CSS\Style.css" />
     <Content Include="Global.asax" />
@@ -90,11 +92,14 @@
     <Content Include="Pages\WebAdminPages\Users.aspx" />
     <Content Include="Pages\WebShopPages\Default.aspx" />
     <Content Include="Pages\WebShopPages\Login.aspx" />
+    <Content Include="Pages\WebShopPages\MyPages.aspx" />
     <Content Include="Pages\WebShopPages\OrderCart.aspx" />
     <Content Include="Pages\WebShopPages\ProceedOrder.aspx" />
     <Content Include="Pages\WebShopPages\Productdetails.aspx" />
     <Content Include="Pages\WebShopPages\Profile.aspx" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Infrastructure\ValidationExtensions.cs" />
@@ -130,8 +135,9 @@
     <Compile Include="Model\DAL\UserDAL.cs" />
     <Compile Include="Model\DAL\ViewOrderDetailsDAL.cs" />
     <Compile Include="Model\Images.cs" />
-    <Compile Include="Model\Logic\CartItem.cs" />
-    <Compile Include="Model\Logic\ShoppingCart.cs" />
+    <Compile Include="Model\SecurityLib\PasswordHasher.cs" />
+    <Compile Include="Model\SecurityLib\StringEncryptor.cs" />
+    <Compile Include="Model\SecurityLib\StringEncryptorException.cs" />
     <Compile Include="Pages\Shared\Error.aspx.cs">
       <DependentUpon>Error.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -279,6 +285,13 @@
     <Compile Include="Pages\WebShopPages\Login.aspx.designer.cs">
       <DependentUpon>Login.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Pages\WebShopPages\MyPages.aspx.cs">
+      <DependentUpon>MyPages.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\WebShopPages\MyPages.aspx.designer.cs">
+      <DependentUpon>MyPages.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Pages\WebShopPages\OrderCart.aspx.cs">
       <DependentUpon>OrderCart.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -312,6 +325,7 @@
   <ItemGroup>
     <Folder Include="Content\ButtonImages\" />
     <Folder Include="Content\Images\Thumbs\" />
+    <Folder Include="Model\Logic\" />
     <Folder Include="Scripts\" />
   </ItemGroup>
   <PropertyGroup>

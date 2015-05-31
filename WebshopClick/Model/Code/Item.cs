@@ -6,6 +6,9 @@ using WebshopClick.Model.BLL;
 
 namespace WebshopClick.Model.Code
 {
+    /// <summary>
+    /// Class for one item in a shopping cart
+    /// </summary>
     public class Item
     {
         #region fields
@@ -14,14 +17,13 @@ namespace WebshopClick.Model.Code
         private int quantity;
 
         #endregion
-
         #region properties
         public Product Product
         {
             get { return product; }
             set { product = value; }
         }
-        
+
 
         public int Quantity
         {
@@ -29,7 +31,6 @@ namespace WebshopClick.Model.Code
             set { quantity = value; }
         }
         #endregion
-
         #region Constructors
 
         public Item()
@@ -42,7 +43,5 @@ namespace WebshopClick.Model.Code
             this.quantity = quantity;
         }
         #endregion
-
-      
     }
 }

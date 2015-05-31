@@ -6,7 +6,6 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using WebshopClick.Model.BLL;
 using WebshopClick.Model.Code;
-using WebshopClick.Model.Logic;
 
 
 namespace WebshopClick.Pages.WebShopPages
@@ -14,7 +13,6 @@ namespace WebshopClick.Pages.WebShopPages
     public partial class Default : System.Web.UI.Page
     {
         private Service _service;
-
         private Service Service
         {
             get { return _service ?? (_service = new Service()); }
@@ -25,8 +23,11 @@ namespace WebshopClick.Pages.WebShopPages
             {
                 UpdateCart();
             }
-
+            isLoged();
         }
+        /// <summary>
+        /// Calculates number of items in the shopping cart
+        /// </summary>
         protected void UpdateCart()
         {
             int cartTotalQuantity = 0;
@@ -35,7 +36,6 @@ namespace WebshopClick.Pages.WebShopPages
             {
                 if ((cart.Count() != 0))
                 {
-
                     foreach (Item item in cart)
                     {
                         cartTotalQuantity = cartTotalQuantity + item.Quantity;
@@ -47,8 +47,36 @@ namespace WebshopClick.Pages.WebShopPages
             lblCart.Text = "0";
             return;
         }
+        /// <summary>
+        /// Sets elements of the page visible/unvisible in dependence if user is logged.
+        /// </summary>
+        protected void isLoged()
+        {
+            User user = (User)Session["User"];
+            ButtonAdmin.Visible = false;
+
+            if (user == null)
+            {
+                btnLogin.Text = "Logga in";
+                return;
+            }
+            else
+            {
+                if (user.Administrator == true)
+                {
+                    ButtonAdmin.Visible = true;
+                }
+
+                btnLogin.Text = "Hej " + user.LoginID;
+
+                if (user.Administrator == true)
+                {
+                    ButtonAdmin.Visible = true;
+                }
+            }
+        }
         protected void SelectionHasChanged(Object sender, System.EventArgs e)
-        {    
+        {
             productList.DataBind();
         }
         public IEnumerable<Category> CategoryDropDownList_GetData()
@@ -63,7 +91,7 @@ namespace WebshopClick.Pages.WebShopPages
                 return null;
             }
         }
-        
+
         public IEnumerable<Product> ProductListView_GetData(int maximumRows, int startRowIndex, out int totalRowCount)
         {
             try
@@ -73,7 +101,7 @@ namespace WebshopClick.Pages.WebShopPages
                 if (CategoryDropDownList.SelectedValue == "-- Välj kategori --" && TxtSearch.Text == "")
                 {
                     return Service.GetProductPageWise(maximumRows, startRowIndex, out totalRowCount);
-                    
+
                 }
                 else if (TxtSearch.Text != "" && CategoryDropDownList.SelectedValue != "-- Välj kategori --")
                 {
@@ -92,7 +120,7 @@ namespace WebshopClick.Pages.WebShopPages
                     return Service.GetProductPageWiseByTitle(title, maximumRows, startRowIndex, out totalRowCount);
                 }
 
-                
+
             }
             catch (Exception)
             {
@@ -106,6 +134,14 @@ namespace WebshopClick.Pages.WebShopPages
         {
             productList.DataBind();
         }
+        protected void ButtonAdmin_Click(object sender, EventArgs e)
+        {
+            Response.RedirectToRoute("alogin");
+        }
+        protected void btnPage_Click(object sender, EventArgs e)
+        {
+            Response.RedirectToRoute("MyPages");
+        }
         protected void btnHem_Click(object sender, EventArgs e)
         {
             Response.RedirectToRoute("Index");
@@ -118,13 +154,10 @@ namespace WebshopClick.Pages.WebShopPages
         {
             Response.RedirectToRoute("ViewCart");
         }
-
-        
-
         private int isExisting(int id)
         {
             List<Item> cart = (List<Item>)Session["cart"];
-            for (int i=0;i < cart.Count;i++)
+            for (int i = 0; i < cart.Count; i++)
             {
                 if (cart[i].Product.ProductID == id)
                 {
@@ -135,16 +168,14 @@ namespace WebshopClick.Pages.WebShopPages
         }
         protected void BuyButton_OnClick(object sender, EventArgs e)
         {
-            
+
             Button myButton = (Button)sender;
             int productID = Convert.ToInt32(myButton.CommandArgument.ToString());
             if (Session["Cart"] == null)
             {
-                List<Item>cart= new List<Item>();           
-                    cart.Add(new Item(this.Service.GetProductByID(productID), 1));
-
-                Session["Cart"]=cart;
-                
+                List<Item> cart = new List<Item>();
+                cart.Add(new Item(this.Service.GetProductByID(productID), 1));
+                Session["Cart"] = cart;
             }
             else
             {
@@ -158,7 +189,7 @@ namespace WebshopClick.Pages.WebShopPages
                 {
                     cart[index].Quantity++;
                 }
-                Session["Cart"] = cart;  
+                Session["Cart"] = cart;
             }
             Response.RedirectToRoute("ViewCart");
         }
@@ -167,11 +198,10 @@ namespace WebshopClick.Pages.WebShopPages
             if (String.Equals(e.CommandName, "AddToCart"))
             {
                 Button myButton = (Button)sender;
-                ShoppingCart.Instance.AddItem(Convert.ToInt32(myButton.CommandArgument.ToString()));
-                
-                // Redirect the user to view their shopping cart
+                //ShoppingCart.Instance.AddItem(Convert.ToInt32(myButton.CommandArgument.ToString()));
+                // Redirect a user to view their shopping cart
                 Response.RedirectToRoute("ViewCart");
             }
-        }   
+        }
     }
 }

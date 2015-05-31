@@ -10,7 +10,7 @@ namespace WebshopClick.Model.DAL
 {
     public class ViewOrderDetailsDAL : DALBase
     {
-        public IEnumerable<ViewOrderDetails> GetOrderrowByOrderViewID(int orderid)
+        public IEnumerable<ViewOrderDetails> GetOrderrowByOrderViewID(int? orderid)
         {
             using (SqlConnection conn = CreateConnection())
             {
@@ -20,7 +20,15 @@ namespace WebshopClick.Model.DAL
                     SqlCommand cmd = new SqlCommand("appSchema.uspGetOrderrowByOrderIDView", conn);
                     cmd.CommandType = CommandType.StoredProcedure;
 
-                    cmd.Parameters.Add("@OrderID", SqlDbType.Int, 6).Value = orderid;
+                    if (orderid == null)
+                    {
+                        cmd.Parameters.Add("@OrderID", SqlDbType.Int, 6).Value = -1;
+                    }
+                    else
+                    {
+                        cmd.Parameters.Add("@OrderID", SqlDbType.Int, 6).Value = orderid;
+                    }
+                    
                     List<ViewOrderDetails> vieworderdetails = new List<ViewOrderDetails>(100);
 
                     conn.Open();

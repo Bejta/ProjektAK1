@@ -14,11 +14,5 @@ namespace WebshopClick.Pages.Shared
         {
             
         }
-
-        //protected void ImgSearch_Click(object sender, ImageClickEventArgs e)
-        //{
-        //    string content = @"~/Pages/WebShopPages/Default.aspx?content=" + TxtSearch.Text;
-        //    Response.Redirect(content);
-        //}
     }
 }

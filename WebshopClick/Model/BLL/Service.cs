@@ -100,7 +100,7 @@ namespace WebshopClick.Model.BLL
             {
                 CategoryDAL.UpdateCategory(category);
             }
-            
+
         }
         public Grade GetGrade(int id)
         {
@@ -261,7 +261,7 @@ namespace WebshopClick.Model.BLL
         }
         public IEnumerable<Product> GetProductPageWiseByCatIDAndTitle(string title, int categoryID, int maximumRows, int startRowIndex, out int totalRowCount)
         {
-            return ProductDAL.GetProductPageWiseByCatIDAndTitle(title,categoryID, maximumRows, startRowIndex, out totalRowCount);
+            return ProductDAL.GetProductPageWiseByCatIDAndTitle(title, categoryID, maximumRows, startRowIndex, out totalRowCount);
         }
         public IEnumerable<Product> GetProductPageWiseByTitle(string title, int maximumRows, int startRowIndex, out int totalRowCount)
         {
@@ -312,7 +312,11 @@ namespace WebshopClick.Model.BLL
         {
             return OrderDAL.GetOrderPageWiseByStatus(statusID, maximumRows, startRowIndex, out totalRowCount);
         }
-        
+        public IEnumerable<Order> GetOrderPageWiseByUserID(int userID, int maximumRows, int startRowIndex, out int totalRowCount)
+        {
+            return OrderDAL.GetOrderPageWiseByUserID(userID, maximumRows, startRowIndex, out totalRowCount);
+        }
+
         public Order GetOrderByID(int id)
         {
             return OrderDAL.GetOrderById(id);
@@ -351,6 +355,10 @@ namespace WebshopClick.Model.BLL
         {
             return UserDAL.GetUserById(id);
         }
+        public User GetUserByLoginID(string loginID)
+        {
+            return UserDAL.GetUserByLoginID(loginID);
+        }
         public void UpdateUser(User user)
         {
             ICollection<ValidationResult> validationResults;
@@ -373,7 +381,7 @@ namespace WebshopClick.Model.BLL
         {
             return OrderrowDAL.GetOrderrow();
         }
-        public IEnumerable<ViewOrderDetails> GetOrderrowByOrderViewID(int orderID)
+        public IEnumerable<ViewOrderDetails> GetOrderrowByOrderViewID(int? orderID)
         {
             return ViewOrderDetailsDAL.GetOrderrowByOrderViewID(orderID);
         }
@@ -385,11 +393,11 @@ namespace WebshopClick.Model.BLL
         {
             return OrderrowDAL.GetOrderrowByProductID(productID);
         }
-        public IEnumerable<Orderrow> GetOrderrowByProductIDAndOrderID(int productID,int orderID)
+        public IEnumerable<Orderrow> GetOrderrowByProductIDAndOrderID(int productID, int orderID)
         {
             return OrderrowDAL.GetOrderrowByProductIDAndOrderID(productID, orderID);
         }
-        
+
 
         public Orderrow GetOrderrowByID(int id)
         {

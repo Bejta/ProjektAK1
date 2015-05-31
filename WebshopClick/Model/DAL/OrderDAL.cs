@@ -306,6 +306,69 @@ namespace WebshopClick.Model.DAL
                 }
             }
         }
+        public IEnumerable<Order> GetOrderPageWiseByUserID(int userID, int maximumRows, int startRowIndex, out int totalRowCount)
+        {
+            using (SqlConnection conn = CreateConnection())
+            {
+                try
+                {
+
+                    SqlCommand cmd = new SqlCommand("appSchema.uspGetOrderPageWiseByUserID", conn);
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    cmd.Parameters.AddWithValue("@UserID", userID);
+                    //cmd.Parameters.Add("@CategoryID", SqlDbType.Int, 4).Value = categoryID;
+                    cmd.Parameters.Add("@PageIndex", SqlDbType.Int, 6).Value = startRowIndex / maximumRows + 1;
+                    cmd.Parameters.Add("@PageSize", SqlDbType.Int, 6).Value = maximumRows;
+                    cmd.Parameters.Add("@RecordCount", SqlDbType.Int, 4).Direction = ParameterDirection.Output;
+                    List<Order> orders = new List<Order>(100);
+
+                    conn.Open();
+
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        var OrderIDIndex = reader.GetOrdinal("OrderID");
+                        var UserIDIndex = reader.GetOrdinal("UserID");
+                        var NameIndex = reader.GetOrdinal("Name");
+                        var DateIndex = reader.GetOrdinal("Date");
+                        var AddressIndex = reader.GetOrdinal("Address");
+                        int PostnumberIndex = reader.GetOrdinal("Postnumber");
+                        int CityIndex = reader.GetOrdinal("City");
+                        int PaymentIDIndex = reader.GetOrdinal("PaymentID");
+                        int StatusIDIndex = reader.GetOrdinal("StatusID");
+
+
+                        while (reader.Read())
+                        {
+                            orders.Add(new Order
+                            {
+                                OrderID = reader.GetInt32(OrderIDIndex),
+                                UserID = reader.GetInt32(UserIDIndex),
+                                Name = reader.GetString(NameIndex),
+                                Date = reader.GetDateTime(DateIndex),
+                                Address = reader.GetString(AddressIndex),
+                                Postnumber = reader.GetString(PostnumberIndex),
+                                City = reader.GetString(CityIndex),
+                                PaymentID = reader.GetInt32(PaymentIDIndex),
+                                StatusID = reader.GetInt32(StatusIDIndex),
+                            });
+                        }
+
+                    }
+
+                    totalRowCount = (int)cmd.Parameters["@RecordCount"].Value;
+                    orders.TrimExcess();
+
+
+                    return orders;
+                }
+                catch
+                {
+                    // Kastar ett eget undantag om ett undantag kastas.
+                    throw new ApplicationException("An error occured in the data access layer.");
+                }
+            }
+        }
         
         public void DeleteOrder(int ID)
         {

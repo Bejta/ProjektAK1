@@ -30,10 +30,10 @@
                         <td>
                             <%#: Item.CategoryName %>
                         </td>
-                        <td class="command">
-                            <asp:LinkButton runat="server" CommandName="Delete" Text="Ta bort" CausesValidation="false" 
+                        <td>
+                            <asp:Button runat="server" CssClass="command" CommandName="Delete" Text="Ta bort" CausesValidation="false" 
                               OnClientClick="return confirm('Ta bort kategori permanent?');" />
-                            <asp:LinkButton runat="server" CommandName="Edit" Text="Redigera" CausesValidation="false" />
+                            <asp:Button runat="server" CssClass="command" CommandName="Edit" Text="Redigera" CausesValidation="false" />
                         </td>
                     </tr>
                 </ItemTemplate>
@@ -53,8 +53,9 @@
                             <asp:TextBox ID="Name" MaxLength="30" runat="server" Text='<%# BindItem.CategoryName %>' />
                         </td>
                         <td>
-                            <asp:LinkButton runat="server" CommandName="Insert" Text="Lägg till" />
-                            <asp:LinkButton runat="server" CommandName="Cancel" Text="Rensa" CausesValidation="false" />
+                            <asp:Button CssClass="commandSpecial" runat="server" CommandName="Insert" Text="Lägg till" />
+                        
+                            <asp:Button CssClass="command" runat="server" CommandName="Cancel" Text="Rensa" CausesValidation="false" />
                         </td>
                     </tr>
                 </InsertItemTemplate>
@@ -65,8 +66,8 @@
                             <asp:TextBox ID="NameEdit" runat="server" Text='<%# BindItem.CategoryName %>' MaxLength="30" />
                         </td>
                         <td>
-                            <asp:LinkButton runat="server" CommandName="Update" Text="Spara" />
-                            <asp:LinkButton runat="server" CommandName="Cancel" Text="Avbryt" CausesValidation="false" />
+                            <asp:Button CssClass="command" runat="server" CommandName="Update" Text="Spara" />
+                            <asp:Button CssClass="command" runat="server" CommandName="Cancel" Text="Avbryt" CausesValidation="false" />
                         </td>
                     </tr>
                 </EditItemTemplate>

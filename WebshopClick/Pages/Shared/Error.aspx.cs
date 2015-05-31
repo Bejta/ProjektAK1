@@ -13,5 +13,9 @@ namespace WebshopClick.Pages.Shared
         {
 
         }
+        protected void btnHem_Click(object sender, EventArgs e)
+        {
+            Response.RedirectToRoute("Index");
+        }
     }
 }
